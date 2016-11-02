@@ -20,15 +20,20 @@ public abstract class Command {
 	public Command(String name, int id) {
 		this.name = name;
 		this.id = id;
-		
-		//Add code to add name and id to respective lists
+
+		// Add code to add name and id to respective lists
 	}
 
 	public abstract void init();
+
 	public abstract void run();
-	public abstract void outputToDashBoard(); //Output all data to dash board
-	public abstract void zeroAllSensors(); // zeroAllSensors may need to be looked at and changed
-	//public abstract boolean isFinished(); Not used at this time may change in the future.
+
+	public abstract void outputToDashBoard(); // Output all data to dash board
+
+	public abstract void zeroAllSensors(); // zeroAllSensors may need to be
+											// looked at and changed
+	// public abstract boolean isFinished(); Not used at this time may change in
+	// the future.
 
 	public String getName() {
 		return name;
