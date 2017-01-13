@@ -1,0 +1,3 @@
+[submodule "src/org/usfirst/frc/team1699/utils/autonomous/autonomous-code"]
+	path = src/org/usfirst/frc/team1699/utils/autonomous/autonomous-code
+	url = https://github.com/FIRST-Team-1699/autonomous-code.git
