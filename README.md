@@ -1,5 +1,5 @@
 # 2017-Code
 
-Code for 2017 Competition Robot
+Code for the 2017 robot.
 
 Written in Java
