@@ -8,14 +8,20 @@ package org.usfirst.frc.team1699.utils.command;
 import java.util.ArrayList;
 
 public class CommandIdArray {
-	// Should store name and id and make sure that no id or name is a duplicate
-
 	private ArrayList<Integer> list;
 
+	/**
+	 * Constructor
+	 */
 	public CommandIdArray() {
 		list = new ArrayList<Integer>();
 	}
 
+	/**
+	 * Adds id to array
+	 * 
+	 * @param id
+	 */
 	public void addId(int id) {
 		if (list.contains(id)) {
 			System.err.println("Id has already been used.");
@@ -25,6 +31,11 @@ public class CommandIdArray {
 		list.add(id);
 	}
 
+	/**
+	 * Returns the array
+	 * 
+	 * @return list
+	 */
 	public ArrayList<Integer> getList() {
 		return list;
 	}

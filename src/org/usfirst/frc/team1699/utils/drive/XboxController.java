@@ -150,8 +150,6 @@ public class XboxController extends GenericHID {
 		}
 	}
 	
-	
-
 	@Override
 	public double getX(Hand hand) {
 		return joystick.getX(hand);
@@ -179,37 +177,31 @@ public class XboxController extends GenericHID {
 
 	@Override
 	public int getPOVCount() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public HIDType getType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void setOutput(int outputNumber, boolean value) {
-		// TODO Auto-generated method stub
-		
+		joystick.setOutput(outputNumber, value);
 	}
 
 	@Override
 	public void setOutputs(int value) {
-		// TODO Auto-generated method stub
-		
+		joystick.setOutputs(value);
 	}
 
 	@Override
 	public void setRumble(RumbleType type, double value) {
-		// TODO Auto-generated method stub
-		
+		joystick.setRumble(type, value);
 	}
 }
