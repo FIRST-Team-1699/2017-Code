@@ -39,11 +39,11 @@ public class XboxController extends GenericHID {
 	
 	
 	@SuppressWarnings("unused")
-	private int port;
+	private final int port;
 	private double deadband;
 	private Joystick joystick;
 	
-	public XboxController(int port, double deadband){
+	public XboxController(final int port, double deadband){
 		super(port);
 		this.port = port;
 		this.deadband = deadband;
