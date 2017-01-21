@@ -8,13 +8,14 @@ import edu.wpi.first.wpilibj.SpeedController;
 public class Pickup extends Command{
 	private XboxController controller;
 	private SpeedController motor;
+	private final double MOTOR_SPEED = 0.5;
+	
 	public Pickup(String name, int id, XboxController controller, SpeedController motor) {
 		super(name, id);
 		this.controller = controller;
 		this.motor = motor;
 		
 	}
-	
 
 	@Override
 	public void init() {
@@ -24,10 +25,10 @@ public class Pickup extends Command{
 	@Override
 	public void run() {
 		if (controller.getA()){ //check to see if the button A is pressed
-			motor.set(1);  //turns motor on
+			motor.set(MOTOR_SPEED);  //turns motor on
 			}
 		else if (controller.getB()){ //check to see if the button B is pressed
-			motor.set(0);  //turns motor on
+			motor.set(0);  //turns motor off
 			}
 	}
 	@Override
