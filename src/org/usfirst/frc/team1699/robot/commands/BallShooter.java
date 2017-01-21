@@ -8,14 +8,37 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 public class BallShooter extends Command{
 	private SpeedController speedController;
-	private XboxController xBoxController;
+	private XboxController xBox;
 	private final double MOTOR_SPEED = .5;
 	
-	public BallShooter(SpeedController speedController, XboxController xBoxController, String name, int id){
+	/**
+	 * constructor
+	 * 
+	 * @param speedController
+	 * @param xBoxController
+	 * @param name
+	 * @param id
+	 */
+	public BallShooter(SpeedController speedController, XboxController xBox, String name, int id){
 		super(name, id);
 		this.speedController = speedController;
-		this.xBoxController = xBoxController;
+		this.xBox = xBox;
 
+	}
+	
+	/**
+	 * sets motor speed to 0
+	 */
+	private void stopShooter(){
+		speedController.set(0);
+	}
+	
+	/**
+	 * runs motor at set speed
+	 * @param speed motor speed(-1.0 to 1.0)
+	 */
+	private void startShooter(double speed){
+		speedController.set(speed);
 	}
 
 	@Override
@@ -24,20 +47,34 @@ public class BallShooter extends Command{
 		
 	}
 
+	/**
+	 * Calls startShooter() if right bumper pressed
+	 * Calls stopShooter() if left bumper pressed
+	 */
 	@Override
 	public void run() {
-		if(xBoxController.getLeftBumper()){
+		if(xBox.getLeftBumper()){
 			stopShooter();
 		}
-		else if(xBoxController.getRightBumper()){
+		else if(xBox.getRightBumper()){
 			startShooter(MOTOR_SPEED);
 		}
 	}
 
+	/**
+	 * Creates instance of TimeControlledMotor 
+	 * runs motors at set speed for set time
+	 * @param distance time run(milliseconds)
+	 * @param speed motor speed(-1.0 to 1.0)
+	 * @param useSensor
+	 */
 	@Override
 	public void runAuto(double distance, double speed, boolean useSensor) {
 		// TODO Auto-generated method stub
 		TimeControlledMotor timedMotor = new TimeControlledMotor(speedController);
+		timedMotor.setSpeed(speed);
+		timedMotor.setTime(distance);
+		timedMotor.run();
 		
 	}
 
@@ -57,13 +94,5 @@ public class BallShooter extends Command{
 	public void zeroAllSensors() {
 		// TODO Auto-generated method stub
 		
-	}
-	
-	private void startShooter(double speed){
-		speedController.set(speed);
-	}
-	
-	private void stopShooter(){
-		speedController.set(0);
 	}
 }
