@@ -3,11 +3,13 @@ package org.usfirst.frc.team1699.robot.commands;
 import org.usfirst.frc.team1699.utils.command.Command;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
 
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 
 public class DriveBase extends Command{
 	private SpeedController mot1, mot2, mot3, mot4;
-	XboxController xBox;
+	private XboxController xBox;
+	private RobotDrive drive;
 
 	public DriveBase(String name, int id, XboxController xBox, SpeedController mot1, SpeedController mot2, SpeedController mot3, SpeedController mot4) {
 		super(name, id);
@@ -20,12 +22,12 @@ public class DriveBase extends Command{
 
 	@Override
 	public void init() {
-		
+		drive = new RobotDrive(mot1, mot2, mot3, mot4);
 	}
 
 	@Override
 	public void run() {
-		
+		drive.arcadeDrive(xBox);
 	}
 
 	@Override
