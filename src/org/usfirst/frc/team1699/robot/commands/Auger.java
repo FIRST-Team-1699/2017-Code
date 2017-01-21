@@ -88,3 +88,4 @@ public class Auger extends Command {
 		// TODO Auto-generated method stub
 		
 	}
+}

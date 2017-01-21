@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1699.robot;
 
+import org.usfirst.frc.team1699.robot.commands.Auger;
 import org.usfirst.frc.team1699.robot.commands.BallShooter;
 import org.usfirst.frc.team1699.robot.commands.Drive;
 import org.usfirst.frc.team1699.robot.commands.DriveBase;
@@ -15,20 +16,27 @@ public class Robot extends IterativeRobot {
 	private CommandMap map;
 	
     public void robotInit() {
+    	//instantiate map
     	map = new CommandMap();
-    	Pickup p = new Pickup(null, 0, null, null); //needs actual values
-    	GearManipulator g = new GearManipulator(null, null, null, null, 0); //needs actual values
-    	BallShooter b = new BallShooter(null, null, null, 0); //needs actual values
-    	DriveBase db = new DriveBase(null, 0, null, null, null, null, null); //needs actual values
-    	Drive d = new Drive(null, 0, null, null, null, null, null, null, null); //needs actual values
-    	Turn t = new Turn(null, 0, null, null, null, null, null, null); //needs actual values
     	
+    	//define and instantiate commands
+    	Pickup p = new Pickup("pickup", 0, null, null); //needs actual values
+    	GearManipulator g = new GearManipulator("gear", 0, null, null, null); //needs actual values
+    	BallShooter b = new BallShooter("shooter", 0, null, null); //needs actual values
+    	DriveBase db = new DriveBase("drive base", 0, null, null, null, null, null); //needs actual values
+    	Drive d = new Drive("dive", 0, null, null, null, null, null, null, null); //needs actual values
+    	Turn t = new Turn("turn", 0, null, null, null, null, null, null); //needs actual values
+    	Auger a = new Auger("auger", 0, null, null); //needs actual values
+    	
+    	//add commands to map
     	map.addEntry(p.getName(), p);
     	map.addEntry(g.getName(), g);
     	map.addEntry(b.getName(), b);
     	map.addEntry(db.getName(), db);
     	map.addEntry(d.getName(), d);
     	map.addEntry(t.getName(), t);
+    	map.addEntry(a.getName(), a);
+    	
     }
 
     public void disabledInit(){
@@ -52,6 +60,14 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopPeriodic() {
+    	map.getCommand("pickup").run();
+    	map.getCommand("gear").run();
+    	map.getCommand("shooter").run();
+    	map.getCommand("drive base").run();
+    	map.getCommand("drive").run();
+    	map.getCommand("turn").run();
+    	map.getCommand("auger").run();
+
     	
     }
     
