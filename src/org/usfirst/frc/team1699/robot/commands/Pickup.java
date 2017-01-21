@@ -10,6 +10,14 @@ public class Pickup extends Command{
 	private SpeedController motor;
 	private final double MOTOR_SPEED = 0.5;
 	
+	/**
+	 * Constructor for the Pickup class
+	 * 
+	 * @param name
+	 * @param id
+	 * @param controller
+	 * @param motor
+	 */
 	public Pickup(String name, int id, XboxController controller, SpeedController motor) {
 		super(name, id);
 		this.controller = controller;
@@ -22,6 +30,10 @@ public class Pickup extends Command{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/**
+	 * Turns the motor on or off depending on which button is pressed
+	 */
 	@Override
 	public void run() {
 		if (controller.getA()){ //check to see if the button A is pressed
