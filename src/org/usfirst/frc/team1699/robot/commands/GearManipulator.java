@@ -15,7 +15,6 @@ public class GearManipulator extends Command{
 		this.controller = controller;
 		
 		
-		
 	}
 
 	@Override
