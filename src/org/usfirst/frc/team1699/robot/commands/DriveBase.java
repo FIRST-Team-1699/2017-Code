@@ -6,7 +6,7 @@ import org.usfirst.frc.team1699.utils.drive.XboxController;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 
-public class DriveBase extends Command{
+public abstract class DriveBase extends Command{
 	private SpeedController mot1, mot2, mot3, mot4;
 	private XboxController xBox;
 	private RobotDrive drive;
@@ -31,16 +31,6 @@ public class DriveBase extends Command{
 	}
 
 	@Override
-	public void runAuto(double distance, double speed, boolean useSensor) {
-		drive.tankDrive(speed, speed);
-	}
-
-	@Override
-	public boolean autoCommandDone() {
-		return false;
-	}
-
-	@Override
 	public void outputToDashboard() {
 		
 	}
@@ -50,4 +40,7 @@ public class DriveBase extends Command{
 		
 	}
 	
+	protected RobotDrive getDrive(){
+		return drive;
+	}
 }
