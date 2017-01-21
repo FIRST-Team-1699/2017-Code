@@ -62,4 +62,5 @@ public class Pickup extends Command{
 	public void zeroAllSensors() {
 		// TODO Auto-generated method stub
 		
-	}}
+	}
+}
