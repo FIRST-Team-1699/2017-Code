@@ -32,7 +32,7 @@ public class DriveBase extends Command{
 
 	@Override
 	public void runAuto(double distance, double speed, boolean useSensor) {
-		
+		drive.tankDrive(speed, speed);
 	}
 
 	@Override
