@@ -6,7 +6,7 @@ import org.usfirst.frc.team1699.utils.drive.XboxController;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 
-public abstract class DriveBase extends Command{
+public class DriveBase extends Command{
 	private SpeedController mot1, mot2, mot3, mot4;
 	private XboxController xBox;
 	private RobotDrive drive;
@@ -42,5 +42,17 @@ public abstract class DriveBase extends Command{
 	
 	protected RobotDrive getDrive(){
 		return drive;
+	}
+
+	@Override
+	public void runAuto(double distance, double speed, boolean useSensor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean autoCommandDone() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
