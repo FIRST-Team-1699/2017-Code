@@ -19,7 +19,7 @@ public class BallShooter extends Command{
 	 * @param name
 	 * @param id
 	 */
-	public BallShooter(SpeedController speedController, XboxController xBox, String name, int id){
+	public BallShooter(String name, int id, SpeedController speedController, XboxController xBox){
 		super(name, id);
 		this.speedController = speedController;
 		this.xBox = xBox;
