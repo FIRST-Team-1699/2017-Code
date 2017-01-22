@@ -69,7 +69,7 @@ public class GearManipulator extends Command{
 
 	@Override
 	public void runAuto(double distance, double speed, boolean useSensor) {
-		// TODO Auto-generated method stub
+		solid_1.set(true);
 
 	}
 
