@@ -22,7 +22,7 @@ public class GearManipulator extends Command{
 		
 	}
 	 
-	 public GearManipulator(Compressor compressor, XboxController controller, Solenoid solid_1, boolean controllerToggle, String name, int id){
+	 public GearManipulator(String name, int id, Compressor compressor, XboxController controller, Solenoid solid_1, boolean controllerToggle){
 			super(name, id);
 			
 			this.controllerToggle = controllerToggle;
