@@ -6,34 +6,43 @@ import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class LineUp extends Command{
 	private Gyro gyro;
 	private RobotDrive drive;
 	private PIDLoop pid;
 	private XboxController xbox;
+	private NetworkTable table;
+	public static final int TARGET_CENTER_X = 180;
+	private double initX = table.getNumber("centerX", 0.0);
 
-	public LineUp(String name, int id, Gyro gyro, RobotDrive drive, PIDLoop pid, XboxController xbox) {
+	public LineUp(String name, int id, Gyro gyro, RobotDrive drive, PIDLoop pid, XboxController xbox, NetworkTable table) {
 		super(name, id);
 		this.gyro = gyro;
 		this.drive = drive;
 		this.pid = pid;
 		this.xbox = xbox;
+		this.table = table;
 	}
 	
 	@Override
 	public void init() {
-		
+		pid.setGoal(TARGET_CENTER_X);
 	}
 
 	@Override
 	public void run() {
-		
+		if(xbox.getBack()){
+			drive.arcadeDrive(0, pid.output());
+		}
 	}
 
 	@Override
 	public void runAuto(double distance, double speed, boolean useSensor) {
-		
+		if(xbox.getBack()){
+			drive.arcadeDrive(0, pid.output());
+		}
 	}
 
 	@Override
