@@ -11,6 +11,17 @@ public class DriveBase extends Command{
 	private XboxController xBox;
 	private RobotDrive drive;
 
+	/**
+	 * Constructor for the DriveBase class
+	 * 
+	 * @param name
+	 * @param id
+	 * @param xBox
+	 * @param mot1
+	 * @param mot2
+	 * @param mot3
+	 * @param mot4
+	 */
 	public DriveBase(String name, int id, XboxController xBox, SpeedController mot1, SpeedController mot2, SpeedController mot3, SpeedController mot4) {
 		super(name, id);
 		this.mot1 = mot1;
@@ -20,11 +31,17 @@ public class DriveBase extends Command{
 		this.xBox = xBox;
 	}
 
+	/**
+	 * Initializes the drive
+	 */
 	@Override
 	public void init() {
 		drive = new RobotDrive(mot1, mot2, mot3, mot4);
 	}
 
+	/**
+	 * Allows the joystick to be used for driving
+	 */
 	@Override
 	public void run() {
 		drive.arcadeDrive(xBox);
@@ -40,6 +57,11 @@ public class DriveBase extends Command{
 		
 	}
 	
+	/**
+	 * Gets the drive
+	 * 
+	 * @return the drive
+	 */
 	protected RobotDrive getDrive(){
 		return drive;
 	}

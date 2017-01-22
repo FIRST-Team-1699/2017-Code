@@ -12,7 +12,7 @@ public class Auger extends Command {
 	private final double MOTOR_SPEED = 0.5;
 	
 	/**
-	 * constructor
+	 * Constructor for the Auger class
 	 * 
 	 * @param name
 	 * @param id
@@ -25,11 +25,19 @@ public class Auger extends Command {
 		this.xbox = xbox;
 	
 	}
-
+	
+	/**
+	 * Stops the auger
+	 */
 	public void stopAuger(){
 		speedController.set(0);
 	}
 	
+	/**
+	 * Sets the speed of the auger
+	 * 
+	 * @param speed
+	 */
 	public void startAuger(double speed){
 		speedController.set(speed);
 	}
