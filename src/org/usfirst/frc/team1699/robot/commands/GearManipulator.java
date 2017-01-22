@@ -12,7 +12,15 @@ public class GearManipulator extends Command{
 		private boolean controllerToggle;
 		private XboxController controller;
 		
-		
+	/**
+	 * Constructor for the GearManipulator class
+	 * 
+	 * @param name
+	 * @param id
+	 * @param compressor
+	 * @param controller
+	 * @param solid_1
+	 */
 	 public GearManipulator(String name, int id, Compressor compressor, XboxController controller,  Solenoid solid_1){
 		super(name, id);
 		controllerToggle = false;
@@ -22,6 +30,16 @@ public class GearManipulator extends Command{
 		
 	}
 	 
+	 /**
+	  * Constructor for the GearManipulator class, allows for the controller to be toggled
+	  * 
+	  * @param compressor
+	  * @param controller
+	  * @param solid_1
+	  * @param controllerToggle
+	  * @param name
+	  * @param id
+	  */
 	 public GearManipulator(Compressor compressor, XboxController controller, Solenoid solid_1, boolean controllerToggle, String name, int id){
 			super(name, id);
 			
@@ -73,7 +91,9 @@ public class GearManipulator extends Command{
 		
 	}
 	
-
+	/**
+	 * Opens the gear manipulator if it is toggled on or the A button is pressed
+	 */
 	private void open(){
 		if (controllerToggle){
 			if (!solid_1.get() && controller.getA()){
@@ -85,6 +105,9 @@ public class GearManipulator extends Command{
 		}
 	}
 	
+	/**
+	 * Closes the gear manipulator if it is toggled off or the B button is pressed
+	 */
 	private void close(){
 		if (controllerToggle){
 			if (controller.getA() && solid_1.get()){
