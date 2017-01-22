@@ -3,6 +3,7 @@ package org.usfirst.frc.team1699.robot;
 
 import org.usfirst.frc.team1699.robot.commands.Auger;
 import org.usfirst.frc.team1699.robot.commands.BallShooter;
+import org.usfirst.frc.team1699.robot.commands.Climber;
 import org.usfirst.frc.team1699.robot.commands.Drive;
 import org.usfirst.frc.team1699.robot.commands.DriveBase;
 import org.usfirst.frc.team1699.robot.commands.GearManipulator;
@@ -21,12 +22,13 @@ public class Robot extends IterativeRobot {
     	
     	//define and instantiate commands
     	Pickup p = new Pickup("pickup", 0, null, null); //needs actual values
-    	GearManipulator g = new GearManipulator("gear", 0, null, null, null); //needs actual values
+    	GearManipulator g = new GearManipulator("gear", 0, null, null, null); //needs actual values (does not have toggle param)
     	BallShooter b = new BallShooter("shooter", 0, null, null); //needs actual values
     	DriveBase db = new DriveBase("drive base", 0, null, null, null, null, null); //needs actual values
     	Drive d = new Drive("dive", 0, null, null, null, null, null, null, null); //needs actual values
     	Turn t = new Turn("turn", 0, null, null, null, null, null, null); //needs actual values
     	Auger a = new Auger("auger", 0, null, null); //needs actual values
+    	Climber c = new Climber("climber", 0, null, null, null, null, null, null, null); //needs actual values (does not have toggle param)
     	
     	//add commands to map
     	map.addEntry(p.getName(), p);
@@ -36,6 +38,7 @@ public class Robot extends IterativeRobot {
     	map.addEntry(d.getName(), d);
     	map.addEntry(t.getName(), t);
     	map.addEntry(a.getName(), a);
+    	map.addEntry(c.getName(), c);
     	
     }
 
@@ -67,7 +70,7 @@ public class Robot extends IterativeRobot {
     	map.getCommand("drive").run();
     	map.getCommand("turn").run();
     	map.getCommand("auger").run();
-
+    	map.getCommand("climber").run();
     	
     }
     
