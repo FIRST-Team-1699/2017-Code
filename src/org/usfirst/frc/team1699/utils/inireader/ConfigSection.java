@@ -7,32 +7,57 @@
  */
 package org.usfirst.frc.team1699.utils.inireader;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.usfirst.frc.team1699.utils.inireader.exception.NotEditableException;
+import org.usfirst.frc.team1699.utils.inireader.exception.NotFoundException;
 
 /**
- * Represents a section of a configuration file. It stores multiple ConfigLine objects and has methods to access and process them. 
+ * Represents a section of a configuration file. 
+ * It stores multiple ConfigLine objects and has methods to access and process them. 
  */
 public class ConfigSection {
 
 	private String name;
-	private ArrayList<ConfigLine<?>> lines = new ArrayList<>();
+	private List<ConfigLine<?>> lines;
+	
+	public final boolean editable;
 
 	/**
 	 * Creates a ConfigSection with the name provided
 	 * 
 	 * @param name the name of the ConfiSection
+	 * @param lines the lines of this ConfigSection
 	 */
-	public ConfigSection(String name) {
+	public ConfigSection(String name, List<ConfigLine<?>> lines) {
 		this.name = name;
+		this.lines = lines;
+		this.editable = false;
+	}
+	
+	/**
+	 * Creates a ConfigSection with the name provided and editable if given true
+	 * 
+	 * @param name the name of the ConfigSection
+	 * @param lines the lines of this ConfigSection
+	 * @param editable if the ConfigSection should be editable
+	 */
+	public ConfigSection(String name, List<ConfigLine<?>> lines, boolean editable) {
+		this.name = name;
+		this.lines = lines;
+		this.editable = editable;
 	}
 	
 	/**
 	 * Creates a copy of the given ConfigSection
+	 * 
+	 * @param section a ConfigSection to copy
 	 */
 	public ConfigSection(ConfigSection section) {
 		this.name = section.getName();
-		this.lines = (ArrayList<ConfigLine<?>>) section.getLines();
+		this.lines = section.getLines();
+		this.editable = section.editable;
 	}
 
 	/**
@@ -50,6 +75,9 @@ public class ConfigSection {
 	 * @param line the ConfigLine to be added
 	 */
 	public void add(ConfigLine<?> line) {
+		if (!this.editable) {
+			throw new NotEditableException("ConfigSection "  + this.name + " is not editable!");
+		}
 		lines.add(line);
 	}
 
@@ -62,22 +90,47 @@ public class ConfigSection {
 	 * @param value  the value for the ConfigLine to be added
 	 */
 	public <Type> void add(String name, Type value) {
+		if (!this.editable) {
+			throw new NotEditableException("ConfigSection "  + this.name + " is not editable!");
+		}		
 		ConfigLine<Type> line = new ConfigLine<Type>(name, value);
 		this.add(line);
 	}
-
+	
 	/**
-	 * Gets the ConfigLine at a specified point. Useful for autonomous. Returns null if the index is out of bounds.
+	 * Overwrite a line if it is editable. 
 	 * 
-	 * @param index index in the ArrayList to return
-	 * @return the ConfigFile at the specified index, null if it does not exist
+	 * Note: in order for a line to be overwritten, the names must match.
+	 * 
+	 * @param line the line to overwrite, with the new value
 	 */
-	public ConfigLine<?> getLine(int index) {
-		try {
-			return new ConfigLine<>(this.lines.get(index));
-		} catch (IndexOutOfBoundsException e) {
-			return null;
+	public void overwrite(ConfigLine<?> line) {
+		
+		// Avoid a NullPointer
+		if (this.lines.isEmpty()) {
+			return;
 		}
+		
+		// Iterate over all the values in the List
+		ConfigLine<?> cl;
+		for (int i = 0; i < this.lines.size(); i += 1) {
+			// Get the value from the list
+			cl = lines.get(i);
+			
+			// See if the names match
+			if (cl.getName().trim().equals(line.getName().trim())) {
+				// Make sure that the ConfigLine (or this section) is editable
+				if (!(cl.editable || this.editable)) {
+					throw new NotEditableException("ConfigLine " + cl.getName() + " is not editable!");
+				}
+				
+				// Remove the old ConfigLine and replace it with the new one
+				this.lines.remove(i);
+				this.lines.add(i, line);
+				return;
+			}
+		}
+		System.err.println("ConfigLine " + line.getName() + " was not found when attempting to overwrite!");
 	}
 	
 	/**
@@ -85,10 +138,11 @@ public class ConfigSection {
 	 * 
 	 * @param name the name of the ConfigLine to look for
 	 * @return the ConfigLine that matches the specified name, null if it does not exist
+	 * @throws NotFoundException if the given name is not found
 	 */
-	public ConfigLine<?> getLine(String name) {
-		for (ConfigLine<?> cl : lines) {
-			if (cl.getName().equals(name)) {
+	public ConfigLine<?> getLine(String name) throws NotFoundException {
+		for (ConfigLine<?> cl : this.lines) {
+			if (cl.getName().trim().equals(name.trim())) {
 				return new ConfigLine<>(cl);
 			}
 		}
@@ -104,13 +158,12 @@ public class ConfigSection {
 		if (this.lines == null) {
 			return null;
 		}
-		ArrayList<ConfigLine<?>> output = new ArrayList<>();
+		List<ConfigLine<?>> output = new ArrayList<>();
 		for (ConfigLine<?> cl : this.lines) {
 			output.add(new ConfigLine<>(cl));
 		}
 		return output;
 	}
-	
 	
 	/**
 	 * Gets the value of a ConfigLine without using a dot operator! Cool!
@@ -120,9 +173,10 @@ public class ConfigSection {
 	 * @param name the name of the ConfigLine to look for
 	 * @param class_type the Class of the type
 	 * @return the the value of this ConfigLine or null if the types do not match
+	 * @throws NotFoundException if the given name is not found
 	 */
 	@SuppressWarnings("unchecked") // it is checked so...
-	public <Check_Type> Check_Type getLineValue(String name, Class<Check_Type> class_type) {
+	public <Check_Type> Check_Type getLineValue(String name, Class<Check_Type> class_type) throws NotFoundException {
 		ConfigLine<?> out = this.getLine(name);
 		if (out.getRawValue().getClass().equals(class_type)) {
 			return (Check_Type) out.getRawValue(); 
@@ -139,7 +193,7 @@ public class ConfigSection {
 		if (this.lines == null) {
 			return null;
 		} else {
-			ArrayList<String> output = new ArrayList<>();
+			List<String> output = new ArrayList<>();
 			for (ConfigLine<?> cl : this.lines) {
 				output.add(cl.getRawValue().toString());
 			}
@@ -157,6 +211,47 @@ public class ConfigSection {
 	}
 	
 	/**
+	 * Test if the given name exists in this ConfigSection
+	 * 
+	 * @param name the name to test
+	 * @return true if the name exists in this ConfigSection
+	 */
+	public boolean contains(String name) {
+		for (ConfigLine<?> cl : this.lines) {
+			if (cl.getName().trim().equals(name.trim())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Attempts to generate the code that made this ConfigSection.
+	 * 
+	 * @return a String with the code that made this ConfigSection
+	 */
+	public String generateCode() {
+		// Make the output String
+		String output = "";
+		
+		// Marks this section editable if it is
+		if (this.editable) {
+			output = "%";
+		}
+		
+		// If this is the global section, then the header is not needed
+		if (!this.name.equals("global")) {
+			output += "[" + this.name + "]\n";
+		}
+		
+		// Generate all the code for this section's ConfigLines
+		for (ConfigLine<?> cl : this.lines) {
+			output += cl.generateCode();
+		}
+		return output;
+	}
+	
+	/**
 	 * @inheritDoc 
 	 */
 	@Override
@@ -166,9 +261,9 @@ public class ConfigSection {
 		for (ConfigLine<?> cl : lines) {
 			output += cl.toString() + "\n";
 		}
-		if (output.charAt(output.length() - 1) == '\n') {
+		/*if (output.charAt(output.length() - 1) == '\n') {
 			output = output.substring(0, output.length() - 1);
-		}
+		}*/
 		return output;
 	}
 

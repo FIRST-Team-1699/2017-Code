@@ -96,6 +96,7 @@ public class AutoUtils {
 	 * @param section
 	 * @return
 	 */
+	//Needs to be fixed
 	public static ArrayList<String> loadFileAsArray(ConfigSection section) { //Takes a ConfigFile and return it as an array of ints
 		// Make the output list
 		ArrayList<String> out = new ArrayList<>();
