@@ -10,8 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
-import org.usfirst.frc.team1699.utils.inireader.ConfigLine;
 import org.usfirst.frc.team1699.utils.inireader.ConfigSection;
 
 public class AutoUtils {
@@ -24,8 +24,8 @@ public class AutoUtils {
 	 */
 	public static int parseInt(String s){ //This is used to turn a string into an int
 		try{
-			return Integer.parseInt(s);
-		}catch(NumberFormatException e){
+			return Integer.parseInt(s); //Converts String to int
+		}catch(NumberFormatException e){ //Catches if String is not an int
 			e.printStackTrace();
 			return 0;
 		}
@@ -39,8 +39,8 @@ public class AutoUtils {
 	 */
 	public static double parseDouble(String s){ //This is used to convert a string into a double
 		try{
-			return Double.parseDouble(s);
-		}catch(NumberFormatException e){
+			return Double.parseDouble(s); //Converts String to double
+		}catch(NumberFormatException e){ //Catches if String is not a double
 			e.printStackTrace();
 			return 0;
 		}
@@ -55,12 +55,12 @@ public class AutoUtils {
 	 */
 	@Deprecated
 	public static String[] loadFileAsArray(String path, int numLines){ //This is no longer used but it took each line of a file and added it to an array
-		String[] fileAsString = new String[numLines];
-		try (BufferedReader br = new BufferedReader(new FileReader(path));) {
-			for(int i = 0; i < numLines; i++){
+		String[] fileAsString = new String[numLines]; //New string array
+		try (BufferedReader br = new BufferedReader(new FileReader(path));) { //Creates a new buffered reader
+			for(int i = 0; i < numLines; i++){ //Loops through each line of the file and adds it to the array
 				fileAsString[i] = br.readLine();
 			}
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) { //Catches if the file is not found
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -74,15 +74,15 @@ public class AutoUtils {
 	 * @param path
 	 * @return
 	 */
-	public static ArrayList<String> loadFileAsArray(String path){ //Takes each line of a file and adds it to an ArrayList then returns that ArrayList
-		ArrayList<String> fileAsString = new ArrayList<String>();
-		try (BufferedReader br = new BufferedReader(new FileReader(path));) {
+	public static List<String> loadFileAsArray(String path){ //Takes each line of a file and adds it to an ArrayList then returns that ArrayList
+		ArrayList<String> fileAsString = new ArrayList<String>(); //New ArrayList that store type String
+		try (BufferedReader br = new BufferedReader(new FileReader(path));) { //Creates a new buffered reader
 			String read = br.readLine();
-			while(read != null){
+			while(read != null){ //Reads each line of the file
 				fileAsString.add(read);
 				read = br.readLine();
 			}
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) { //Catches if file is not found
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -91,32 +91,22 @@ public class AutoUtils {
 	}
 	
 	/**
-	 * Reads a file and returns it as an array of integers
+	 * Gets a List of Strings from a ConfigSection
 	 * 
 	 * @param section
 	 * @return
 	 */
-	//Needs to be fixed
-	public static ArrayList<String> loadFileAsArray(ConfigSection section) { //Takes a ConfigFile and return it as an array of ints
-		// Make the output list
-		ArrayList<String> out = new ArrayList<>();
-		
-		// Run through all the values in the list until null is hit
-		int i = 0;
-		ConfigLine<?> cl;
-		while ((cl = section.getLine(i)) != null) {
-			// Check that the ConfigLine is a String
-			if (cl.getClass().equals(String.class)) {
-				out.add((String) cl.getValue(String.class));
-			}
-			// Iterate
-			i += 1;
-		}
-		
-		// Return the output
-		return out;
+	public static List<String> loadFileAsArray(ConfigSection section) { 
+		// Takes a ConfigSection and return it as a List of Strings
+		return section.getStringValues();
 	}
 
+	/**
+	 * Parses String to boolean
+	 * 
+	 * @param str
+	 * @return boolean
+	 */
 	public static boolean parseBoolean(String str) { //Needs work
 		return str.equals("true") || str.equals("True");
 	}

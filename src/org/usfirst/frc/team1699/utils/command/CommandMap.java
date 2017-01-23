@@ -1,10 +1,15 @@
+/**
+ * Map that is used to store commands
+ * 
+ * @author squirlemasster42
+ */
 package org.usfirst.frc.team1699.utils.command;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class CommandMap {
-	private Map<String, Command> cmds;
+	private Map<String, Command> cmds; //Stores Command to a String key
 	
 	/**
 	 * Constructor
@@ -14,58 +19,43 @@ public class CommandMap {
 	}
 	
 	/**
-	 * Returns the map
+	 * Returns map
 	 * 
-	 * @return cmds
+	 * @return Map of Commands
 	 */
 	public Map<String, Command> getCmds(){
 		return cmds;
 	}
 	
 	/**
-	 * Gets Command for a key
+	 * Returns a Command for a key
 	 * 
 	 * @param key
-	 * @return Command
+	 * @return Command for a key
 	 */
 	public Command getCommand(String key){
 		return cmds.get(key);
 	}
 	
 	/**
-	 * Returns true if map contains a key
+	 * Returns true is Map has the key
 	 * 
 	 * @param key
-	 * @return boolean
+	 * @return true is Map has key
 	 */
 	public boolean hasKey(String key){
 		return cmds.containsKey(key);
 	}
 	
-	/**
-	 * Removes command for a key
-	 * 
-	 * @param key
-	 */
+	
 	public void removeCmd(String key){
 		cmds.remove(key);
 	}
 	
-	/**
-	 * Returns the size of the Map
-	 * 
-	 * @return size
-	 */
 	public int size(){
 		return cmds.size();
 	}
 	
-	/**
-	 * Adds command to the array
-	 * 
-	 * @param key
-	 * @param cmd
-	 */
 	public void addEntry(String key, Command cmd){
 		if(cmds.containsKey(key)){
 			throw new NameUsedException();
