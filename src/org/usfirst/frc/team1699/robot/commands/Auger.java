@@ -1,12 +1,13 @@
 package org.usfirst.frc.team1699.robot.commands;
 
+import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
 import org.usfirst.frc.team1699.utils.command.Command;
 import org.usfirst.frc.team1699.utils.drive.TimeControlledMotor;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.SpeedController;
 
-public class Auger extends Command {
+public class Auger extends Command implements AutoCommand{
 	private XboxController xbox;
 	private SpeedController speedController;
 	private final double MOTOR_SPEED = 0.5;

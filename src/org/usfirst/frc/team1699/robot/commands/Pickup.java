@@ -43,21 +43,13 @@ public class Pickup extends Command{
 			motor.set(0);  //turns motor off
 			}
 	}
-	@Override
-	public void runAuto(double distance, double speed, boolean useSensor) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public boolean autoCommandDone() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 	@Override
 	public void outputToDashboard() {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	@Override
 	public void zeroAllSensors() {
 		// TODO Auto-generated method stub

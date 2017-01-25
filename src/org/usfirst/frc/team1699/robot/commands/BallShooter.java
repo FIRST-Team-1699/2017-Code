@@ -1,12 +1,13 @@
 package org.usfirst.frc.team1699.robot.commands;
 
+import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
 import org.usfirst.frc.team1699.utils.command.Command;
 import org.usfirst.frc.team1699.utils.drive.TimeControlledMotor;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.SpeedController;
 
-public class BallShooter extends Command{
+public class BallShooter extends Command implements AutoCommand{
 	private SpeedController speedController;
 	private XboxController xBox;
 	private final double MOTOR_SPEED = .5;

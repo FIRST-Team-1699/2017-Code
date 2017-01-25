@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1699.robot.commands;
 
 import org.usfirst.frc.team1699.robot.pid.PIDLoop;
+import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
 import org.usfirst.frc.team1699.utils.command.Command;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
 
@@ -8,7 +9,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
-public class LineUp extends Command{
+public class LineUp extends Command implements AutoCommand{
 	private Gyro gyro;
 	private RobotDrive drive;
 	private PIDLoop pid;

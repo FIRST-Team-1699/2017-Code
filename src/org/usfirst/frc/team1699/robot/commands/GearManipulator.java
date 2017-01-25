@@ -1,12 +1,13 @@
 package org.usfirst.frc.team1699.robot.commands;
 
+import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
 import org.usfirst.frc.team1699.utils.command.Command;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 
-public class GearManipulator extends Command{
+public class GearManipulator extends Command implements AutoCommand{
 		private Compressor compressor;
 		private Solenoid solid_1;
 		private boolean controllerToggle;

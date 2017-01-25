@@ -1,11 +1,12 @@
 package org.usfirst.frc.team1699.robot.commands;
 
+import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 
-public class Turn extends DriveBase{
+public class Turn extends DriveBase implements AutoCommand{
 	private Encoder sen;
 
 	/**

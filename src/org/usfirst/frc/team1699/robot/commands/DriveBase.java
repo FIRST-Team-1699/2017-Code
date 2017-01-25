@@ -65,16 +65,4 @@ public class DriveBase extends Command{
 	protected RobotDrive getDrive(){
 		return drive;
 	}
-
-	@Override
-	public void runAuto(double distance, double speed, boolean useSensor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean autoCommandDone() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 }

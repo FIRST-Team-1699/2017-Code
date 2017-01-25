@@ -135,21 +135,7 @@ public class Climber extends Command{
 			driveClimber(MOTOR_SPEED);
 		}else if(xbox.getDPadDown()){
 			stopClimber();
-		}
-		
-		
-	}
-
-	@Override
-	public void runAuto(double distance, double speed, boolean useSensor) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean autoCommandDone() {
-		// TODO Auto-generated method stub
-		return false;
+		}		
 	}
 
 	@Override
