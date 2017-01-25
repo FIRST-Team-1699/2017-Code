@@ -10,40 +10,80 @@ public class SimXboxController{
 	private double leftStickValue; //Left stick value
 	private Map<Button, State> stateMap = new HashMap<>(); //Maps each button to a state
 
+	/**
+	 * Constructor
+	 */
 	public SimXboxController() {
 		//Sets values to zero
 		this.rightStickValue = 0; 
 		this.leftStickValue = 0;
 	}
 	
+	/**
+	 * Sets state for a button
+	 * 
+	 * @param b
+	 * @param s
+	 */
 	public void setState(Button b, State s){
 		//Sets state for a certain button
 		stateMap.put(b, s);
 	}
 	
+	/**
+	 * Gets state for a button
+	 * 
+	 * @param b
+	 * @return State
+	 */
 	public State getState(Button b){
 		//Gets state for a button
 		return stateMap.get(b);
 	}
 	
+	/**
+	 * Returns right stick value
+	 * 
+	 * @return rightStickValue
+	 */
 	public double getRightStickValue() {
 		//Gets value for right stick
 		return rightStickValue;
 	}
 	
+	/**
+	 * Sets right stick value
+	 * 
+	 * @param rightStickValue
+	 */
 	public void setRightStickValue(double rightStickValue) {
 		//Sets value for right stick
 		this.rightStickValue = rightStickValue;
 	}
 
+	/**
+	 * Returns leftStickValue
+	 * 
+	 * @return leftStickValue
+	 */
 	public double getLeftStickValue() {
 		return leftStickValue;
 	}
 
+	/**
+	 * Sets left stick value
+	 * 
+	 * @param leftStickValue
+	 */
 	public void setLeftStickValue(double leftStickValue) {
 		this.leftStickValue = leftStickValue;
 	}
-
+ 
+	/**
+	 * Returns stateMap
+	 * 
+	 * @return Map
+	 */
 	public Map<Button, State> getStateMap() {
 		return stateMap;
 	}
