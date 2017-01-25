@@ -26,7 +26,6 @@ public class SimXboxController{
 	 * @param s
 	 */
 	public void setState(Button b, State s){
-		//Sets state for a certain button
 		stateMap.put(b, s);
 	}
 	
@@ -37,7 +36,6 @@ public class SimXboxController{
 	 * @return State
 	 */
 	public State getState(Button b){
-		//Gets state for a button
 		return stateMap.get(b);
 	}
 	
@@ -47,7 +45,6 @@ public class SimXboxController{
 	 * @return rightStickValue
 	 */
 	public double getRightStickValue() {
-		//Gets value for right stick
 		return rightStickValue;
 	}
 	
@@ -57,7 +54,6 @@ public class SimXboxController{
 	 * @param rightStickValue
 	 */
 	public void setRightStickValue(double rightStickValue) {
-		//Sets value for right stick
 		this.rightStickValue = rightStickValue;
 	}
 
