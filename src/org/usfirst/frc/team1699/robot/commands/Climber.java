@@ -28,8 +28,7 @@ public class Climber extends Command{
 	 * @param solid
 	 * @param xbox
 	 */
-	public Climber(String name, int id, SpeedController sc1, SpeedController sc2, SpeedController sc3, SpeedController sc4,
-			Compressor compressor, Solenoid solid, XboxController xbox){
+	public Climber(String name, int id, SpeedController sc1, SpeedController sc2, SpeedController sc3, SpeedController sc4,	Compressor compressor, Solenoid solid, XboxController xbox){
 		super(name, id);
 		sController1 = sc1;
 		sController2 = sc2;
@@ -54,8 +53,7 @@ public class Climber extends Command{
 	 * @param xbox
 	 * @param controllerToggle
 	 */
-	public Climber(String name, int id, SpeedController sc1, SpeedController sc2, SpeedController sc3, SpeedController sc4,
-			Compressor compressor, Solenoid solid, XboxController xbox, boolean controllerToggle){
+	public Climber(String name, int id, SpeedController sc1, SpeedController sc2, SpeedController sc3, SpeedController sc4,	Compressor compressor, Solenoid solid, XboxController xbox, boolean controllerToggle){
 		super(name, id);
 		sController1 = sc1;
 		sController2 = sc2;
