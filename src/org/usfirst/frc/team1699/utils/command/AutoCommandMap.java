@@ -8,14 +8,16 @@ package org.usfirst.frc.team1699.utils.command;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CommandMap {
-	private Map<String, Command> cmds; //Stores Command to a String key
+import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
+
+public class AutoCommandMap {
+	private Map<String, AutoCommand> cmds; //Stores Command to a String key
 	
 	/**
 	 * Constructor
 	 */
-	public CommandMap(){
-		cmds = new HashMap<String, Command>();
+	public AutoCommandMap(){
+		cmds = new HashMap<String, AutoCommand>();
 	}
 	
 	/**
@@ -23,7 +25,7 @@ public class CommandMap {
 	 * 
 	 * @return Map of Commands
 	 */
-	public Map<String, Command> getCmds(){
+	public Map<String, AutoCommand> getCmds(){
 		return cmds;
 	}
 	
@@ -33,7 +35,7 @@ public class CommandMap {
 	 * @param key
 	 * @return Command for a key
 	 */
-	public Command getCommand(String key){
+	public AutoCommand getCommand(String key){
 		return cmds.get(key);
 	}
 	
@@ -56,7 +58,7 @@ public class CommandMap {
 		return cmds.size();
 	}
 	
-	public void addEntry(String key, Command cmd){
+	public void addEntry(String key, AutoCommand cmd){
 		if(cmds.containsKey(key)){
 			throw new NameUsedException();
 		}
