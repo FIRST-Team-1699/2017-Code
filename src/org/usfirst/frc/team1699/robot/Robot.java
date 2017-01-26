@@ -14,6 +14,16 @@ import org.usfirst.frc.team1699.utils.command.AutoCommandMap;
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 public class Robot extends IterativeRobot {
+	
+	//define and instantiate commands
+	private Pickup p;
+	private GearManipulator g;
+	private BallShooter b;
+	private DriveBase db;
+	private Drive d;
+	private Turn t;
+	private Auger a;
+	private Climber c;
 	private AutoCommandMap map;
 	
     public void robotInit() {
@@ -21,14 +31,14 @@ public class Robot extends IterativeRobot {
     	map = new AutoCommandMap();
     	
     	//define and instantiate commands
-    	Pickup p = new Pickup("pickup", 0, null, null); //needs actual values
-    	GearManipulator g = new GearManipulator("gear", 0, null, null, null); //needs actual values (does not have toggle param)
-    	BallShooter b = new BallShooter("shooter", 0, null, null); //needs actual values
-    	DriveBase db = new DriveBase("drive base", 0, null, null, null, null, null); //needs actual values
-    	Drive d = new Drive("dive", 0, null, null, null, null, null, null, null); //needs actual values
-    	Turn t = new Turn("turn", 0, null, null, null, null, null, null); //needs actual values
-    	Auger a = new Auger("auger", 0, null, null); //needs actual values
-    	Climber c = new Climber("climber", 0, null, null, null, null, null, null, null); //needs actual values (does not have toggle param)
+    	p = new Pickup("pickup", 0, null, null); //needs actual values
+    	g = new GearManipulator("gear", 0, null, null, null); //needs actual values (does not have toggle param)
+    	b = new BallShooter("shooter", 0, null, null); //needs actual values
+    	db = new DriveBase("drive base", 0, null, null, null, null, null); //needs actual values
+    	d = new Drive("dive", 0, null, null, null, null, null, null, null); //needs actual values
+    	t = new Turn("turn", 0, null, null, null, null, null, null); //needs actual values
+    	a = new Auger("auger", 0, null, null); //needs actual values
+    	c = new Climber("climber", 0, null, null, null, null, null, null, null); //needs actual values (does not have toggle param)
     	
     	//add commands to map
     	map.addEntry(g.getName(), g);
@@ -60,7 +70,12 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopPeriodic() {
-    	
+    	p.run();
+    	g.run();
+    	b.run();
+    	db.run();
+    	a.run();
+    	c.run();
     }
     
     public void testPeriodic() {
