@@ -9,8 +9,6 @@
  */
 package org.usfirst.frc.team1699.utils.command;
 
-import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
-
 public abstract class Command implements Commandable{
 
 	private String name; //Holds command name
