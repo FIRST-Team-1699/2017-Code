@@ -29,6 +29,8 @@ public class PIDLoop {
 	
 	private PIDSensor sens;
 	
+	private int id;
+	
 	/**
 	 * Creates a PID loop that automatically gets the value from a source.
 	 * 
@@ -38,12 +40,13 @@ public class PIDLoop {
 	 * @param _Dk D constant
 	 * @param _pot Potentiometer to read from
 	 */
-	public PIDLoop(String name, double Pk, double Ik, double Dk, PIDSensor sens) {
+	public PIDLoop(String name, int id, double Pk, double Ik, double Dk, PIDSensor sens) {
 		this.name = name;
 		this.Pk = Pk;
 		this.Ik = Ik;
 		this.Dk = Dk;
 		this.sens = sens;
+		this.id = id;
 	}
 	
 	/**
@@ -53,6 +56,10 @@ public class PIDLoop {
 	 */
 	public String getName() {
 		return this.name;
+	}
+	
+	public int getId() {
+		return this.id;
 	}
 	
 	/**
