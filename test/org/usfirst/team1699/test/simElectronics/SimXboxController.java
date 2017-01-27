@@ -8,7 +8,7 @@ public class SimXboxController{
 	private enum State {Pressed, Released}; //Valid states for a button
 	private double rightStickValue; //Right stick value
 	private double leftStickValue; //Left stick value
-	private Map<Button, State> stateMap = new HashMap<>(); //Maps each button to a state
+	private Map<Button, State> stateMap = new HashMap<Button, State>(); //Maps each button to a state
 
 	/**
 	 * Constructor
