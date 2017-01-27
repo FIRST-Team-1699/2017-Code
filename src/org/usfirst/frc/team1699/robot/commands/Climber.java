@@ -13,7 +13,7 @@ public class Climber extends Command{
 	private Solenoid solid;
 	private XboxController xbox;
 	private boolean controllerToggle;
-	private final double MOTOR_SPEED = 0.5;
+	private double speed = 0;
 	
 	/**
 	 * Constructor for the Climber class (no controller toggle)
@@ -130,9 +130,13 @@ public class Climber extends Command{
 		disengageClimber();
 		engageClimber();
 		if(xbox.getDPadUp()){
-			driveClimber(MOTOR_SPEED);
+			driveClimber(speed);
+			if (speed <= 1){
+				speed += 0.01;
+			}
 		}else if(xbox.getDPadDown()){
 			stopClimber();
+			speed = 0;
 		}		
 	}
 
