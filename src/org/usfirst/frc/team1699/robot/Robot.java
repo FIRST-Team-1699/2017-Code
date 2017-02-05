@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
     	d = new Drive("dive", 0, null, null, null, null, null, null, null); //needs actual values
     	t = new Turn("turn", 0, null, null, null, null, null, null); //needs actual values
     	a = new BallDoor("auger", 0, null, null); //needs actual values
-    	c = new Climber("climber", 0, null, null, null, null, null, null, null); //needs actual values (does not have toggle param)
+    	c = new Climber("climber", 0, null, null, null, null); //needs actual values (does not have toggle param)
     	
     	//add commands to map
     	map.addEntry(g.getName(), g);
