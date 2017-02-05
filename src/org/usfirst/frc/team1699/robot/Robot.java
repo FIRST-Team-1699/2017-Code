@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team1699.robot;
 
-import org.usfirst.frc.team1699.robot.commands.Auger;
+import org.usfirst.frc.team1699.robot.commands.BallDoor;
 import org.usfirst.frc.team1699.robot.commands.BallShooter;
 import org.usfirst.frc.team1699.robot.commands.Climber;
 import org.usfirst.frc.team1699.robot.commands.Drive;
@@ -12,6 +12,7 @@ import org.usfirst.frc.team1699.robot.commands.Turn;
 import org.usfirst.frc.team1699.utils.command.AutoCommandMap;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Solenoid;
 
 public class Robot extends IterativeRobot {
 	
@@ -22,11 +23,13 @@ public class Robot extends IterativeRobot {
 	private DriveBase db;
 	private Drive d;
 	private Turn t;
-	private Auger a;
+	private BallDoor a;
 	private Climber c;
 	private AutoCommandMap map;
 	
     public void robotInit() {
+    	Solenoid.setDefaultSolenoidModule(0);
+    	
     	//instantiate map
     	map = new AutoCommandMap();
     	
@@ -37,7 +40,7 @@ public class Robot extends IterativeRobot {
     	db = new DriveBase("drive base", 0, null, null, null, null, null); //needs actual values
     	d = new Drive("dive", 0, null, null, null, null, null, null, null); //needs actual values
     	t = new Turn("turn", 0, null, null, null, null, null, null); //needs actual values
-    	a = new Auger("auger", 0, null, null); //needs actual values
+    	a = new BallDoor("auger", 0, null, null); //needs actual values
     	c = new Climber("climber", 0, null, null, null, null, null, null, null); //needs actual values (does not have toggle param)
     	
     	//add commands to map
