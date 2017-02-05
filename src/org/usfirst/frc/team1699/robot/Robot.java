@@ -11,6 +11,7 @@ import org.usfirst.frc.team1699.robot.commands.Pickup;
 import org.usfirst.frc.team1699.robot.commands.Turn;
 import org.usfirst.frc.team1699.utils.command.AutoCommandMap;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -26,16 +27,19 @@ public class Robot extends IterativeRobot {
 	private BallDoor a;
 	private Climber c;
 	private AutoCommandMap map;
+	private Compressor comp;
 	
     public void robotInit() {
     	Solenoid.setDefaultSolenoidModule(0);
+    	comp = new Compressor(0);
+    	comp.start();
     	
     	//instantiate map
     	map = new AutoCommandMap();
     	
     	//define and instantiate commands
     	p = new Pickup("pickup", 0, null, null); //needs actual values
-    	g = new GearManipulator("gear", 0, null, null, null); //needs actual values (does not have toggle param)
+    	g = new GearManipulator("gear", 0, null, null); //needs actual values (does not have toggle param)
     	b = new BallShooter("shooter", 0, null, null); //needs actual values
     	db = new DriveBase("drive base", 0, null, null, null, null, null); //needs actual values
     	d = new Drive("dive", 0, null, null, null, null, null, null, null); //needs actual values

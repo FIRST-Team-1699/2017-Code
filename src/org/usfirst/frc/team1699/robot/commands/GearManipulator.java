@@ -5,13 +5,16 @@ import org.usfirst.frc.team1699.utils.command.Command;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
 
 public class GearManipulator extends Command implements AutoCommand{
-		private Compressor compressor;
-		private Solenoid solid_1;
+		private DoubleSolenoid solenoid;
 		private boolean controllerToggle;
 		private XboxController controller;
+		public static final double SOLENOID_OFF = 0.0;
+		public static final double SOLENOID_ON = 1.0;
 		
 	/**
 	 * Constructor for the GearManipulator class
@@ -22,11 +25,10 @@ public class GearManipulator extends Command implements AutoCommand{
 	 * @param controller
 	 * @param solid_1
 	 */
-	 public GearManipulator(String name, int id, Compressor compressor, XboxController controller,  Solenoid solid_1){
+	 public GearManipulator(String name, int id, XboxController controller,  DoubleSolenoid solenoid){
 		super(name, id);
 		controllerToggle = false;
-		this.solid_1 = solid_1;
-		this.compressor = compressor;
+		this.solenoid = solenoid;
 		this.controller = controller;
 		
 	}
@@ -41,13 +43,11 @@ public class GearManipulator extends Command implements AutoCommand{
 	  * @param name
 	  * @param id
 	  */
-	 public GearManipulator(String name, int id, Compressor compressor, XboxController controller, Solenoid solid_1, boolean controllerToggle){
+	 public GearManipulator(String name, int id, XboxController controller, DoubleSolenoid solenoid, boolean controllerToggle){
 			super(name, id);
 			
 			this.controllerToggle = controllerToggle;
-			this.solid_1 = solid_1;
-			
-			this.compressor = compressor;
+			this.solenoid = solenoid;
 			this.controller = controller;
 			
 		}
@@ -55,68 +55,42 @@ public class GearManipulator extends Command implements AutoCommand{
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
-		compressor.start();
-		solid_1.set(false);
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		close();
-		open();
-		
+		if(controller.getA()){
+			solenoid.set(Value.kForward);
+		}else if(controller.getB()){
+			solenoid.set(Value.kReverse);
+		}else{
+			solenoid.set(Value.kOff);
+		}
 	}
 
 	@Override
 	public void runAuto(double distance, double speed, boolean useSensor) {
-		solid_1.set(true);
-
+		if(speed == SOLENOID_OFF){
+			solenoid.set(Value.kReverse);
+		}else if(speed == SOLENOID_ON){
+			solenoid.set(Value.kForward);
+		}else{
+			solenoid.set(Value.kOff);
+		}
 	}
 
 	@Override
 	public boolean autoCommandDone() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void outputToDashboard() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void zeroAllSensors() {
-		// TODO Auto-generated method stub
 		
-	}
-	
-	/**
-	 * Opens the gear manipulator if it is toggled on or the A button is pressed
-	 */
-	private void open(){
-		if (controllerToggle){
-			if (!solid_1.get() && controller.getA()){
-				solid_1.set(true);
-			}
-		}
-		else if (controller.getA()){
-			solid_1.set(true);
-		}
-	}
-	
-	/**
-	 * Closes the gear manipulator if it is toggled off or the B button is pressed
-	 */
-	private void close(){
-		if (controllerToggle){
-			if (controller.getA() && solid_1.get()){
-				solid_1.set(false);
-			}
-		}
-		else if (controller.getB()){
-			solid_1.set(false);
-		}
 	}
 }
