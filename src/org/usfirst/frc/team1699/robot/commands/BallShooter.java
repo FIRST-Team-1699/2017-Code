@@ -20,7 +20,7 @@ public class BallShooter extends Command implements AutoCommand{
 	 * @param name
 	 * @param id
 	 */
-	public BallShooter(String name, int id, SpeedController speedController, XboxController xBox){
+	public BallShooter(String name, int id,  XboxController xBox, SpeedController speedController){
 		super(name, id);
 		this.speedController = speedController;
 		this.xBox = xBox;
@@ -45,7 +45,7 @@ public class BallShooter extends Command implements AutoCommand{
 	@Override
 	public void init() {
 		// TODO Auto-generated method stub
-		
+		 
 	}
 
 	/**

@@ -21,7 +21,7 @@ public class BallDoor extends Command implements AutoCommand{
 	 * @param speedController
 	 * @param xbox
 	 */
-	public BallDoor(String name, int id, DoubleSolenoid solenoid, XboxController xbox){
+	public BallDoor(String name, int id, XboxController xbox, DoubleSolenoid solenoid){
 		super(name, id);
 		this.solenoid = solenoid;
 		this.xbox = xbox;
