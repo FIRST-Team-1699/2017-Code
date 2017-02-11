@@ -20,10 +20,10 @@ public class Drive extends DriveBase implements AutoCommand{
 	 * @param mot2
 	 * @param mot3
 	 * @param mot4
-	 * @param time
 	 * @param sen
+	 * @param sen2
 	 */
-	public Drive(String name, int id, XboxController xBox, SpeedController mot1, SpeedController mot2, SpeedController mot3, SpeedController mot4, Timer time, Encoder sen) {
+	public Drive(String name, int id, XboxController xBox, SpeedController mot1, SpeedController mot2, SpeedController mot3, SpeedController mot4, Encoder sen, Encoder sen2) {
 		super(name, id, xBox, mot1, mot2, mot3, mot4);
 		this.sen = sen;
 	}

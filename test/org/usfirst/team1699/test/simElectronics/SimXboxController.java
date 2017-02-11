@@ -3,9 +3,12 @@ package org.usfirst.team1699.test.simElectronics;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SimXboxController{
-	private enum Button {A, B, X, Y, Back, Start, LSButton, RSButton, RBumper, LBumper}; //Available buttons on the controller
-	private enum State {Pressed, Released}; //Valid states for a button
+import org.usfirst.frc.team1699.utils.drive.XboxController;
+
+
+public class SimXboxController extends XboxController{
+	public enum Button {A, B, X, Y, Back, Start, LSButton, RSButton, RBumper, LBumper}; //Available buttons on the controller
+	public enum State {Pressed, Released}; //Valid states for a button
 	private double rightStickValue; //Right stick value
 	private double leftStickValue; //Left stick value
 	private Map<Button, State> stateMap = new HashMap<Button, State>(); //Maps each button to a state
@@ -13,8 +16,8 @@ public class SimXboxController{
 	/**
 	 * Constructor
 	 */
-	public SimXboxController() {
-		//Sets values to zero
+	public SimXboxController(int port, double deadband) {
+		super(port, deadband);
 		this.rightStickValue = 0; 
 		this.leftStickValue = 0;
 	}

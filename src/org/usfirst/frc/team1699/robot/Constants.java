@@ -20,6 +20,11 @@ public class Constants {
 	public static final int GEAR_MANIPULATOR_SOLENOID_OPEN = 2;
 	public static final int GEAR_MANIPULATOR_SOLENOID_CLOSE = 3;
 	
+	public static final int ENCODER1_1 = 0;
+	public static final int ENCODER1_2 = 1;
+	public static final int ENCODER2_1 = 3;
+	public static final int ENCODER2_2 = 4;
+	
 	
 	
 	

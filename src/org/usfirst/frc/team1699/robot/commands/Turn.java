@@ -21,7 +21,7 @@ public class Turn extends DriveBase implements AutoCommand{
 	 * @param mot4
 	 * @param sen
 	 */
-	public Turn(String name, int id, XboxController xBox, SpeedController mot1, SpeedController mot2, SpeedController mot3, SpeedController mot4, Encoder sen) {
+	public Turn(String name, int id, XboxController xBox, SpeedController mot1, SpeedController mot2, SpeedController mot3, SpeedController mot4, Encoder sen, Encoder sen2) {
 		super(name, id, xBox, mot1, mot2, mot3, mot4);
 		this.sen = sen;
 	}

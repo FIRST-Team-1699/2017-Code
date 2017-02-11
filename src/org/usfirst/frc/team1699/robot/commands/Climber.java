@@ -24,7 +24,7 @@ public class Climber extends Command{
 	 * @param compressor
 	 * @param xbox
 	 */
-	public Climber(String name, int id, SpeedController sc1, SpeedController sc2, Compressor compressor, XboxController xbox){
+	public Climber(String name, int id, XboxController xbox, SpeedController sc1, SpeedController sc2, Compressor compressor){
 		super(name, id);
 		sController1 = sc1;
 		sController2 = sc2;
