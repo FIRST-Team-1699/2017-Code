@@ -12,18 +12,20 @@ import edu.wpi.first.wpilibj.SpeedController;
 public class BallDoor extends Command implements AutoCommand{
 	private XboxController xbox;
 	private DoubleSolenoid solenoid;
+//	private DoubleSolenoid solenoid2; solenoid2 would be for the agitator
 	
 	/**
-	 * Constructor for the Auger class
+	 * Constructor for the BallDoor class
 	 * 
 	 * @param name
 	 * @param id
-	 * @param speedController
 	 * @param xbox
+	 * @param solenoid
 	 */
 	public BallDoor(String name, int id, XboxController xbox, DoubleSolenoid solenoid){
 		super(name, id);
 		this.solenoid = solenoid;
+		//this.solenoid2 = solenoid2;
 		this.xbox = xbox;
 	
 	}
@@ -40,6 +42,10 @@ public class BallDoor extends Command implements AutoCommand{
 		}else{
 			solenoid.set(Value.kReverse);
 		}
+//		if(xbox.getBack()){
+//			solenoid2.set(Value.kForward);
+//		}else{
+//			solenoid2.set(Value.kReverse);
 	}
 
 	@Override
