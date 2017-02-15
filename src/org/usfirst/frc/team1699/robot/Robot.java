@@ -85,7 +85,7 @@ public class Robot extends IterativeRobot {
     	p = new Pickup("pickup", 0, appendageController, pickup); //needs actual values
     	g = new GearManipulator("gear", 1, appendageController, gearManipulator); //needs actual values (does not have toggle param)
     	b = new BallShooter("shooter", 2, appendageController, shooter); //needs actual values
-    	db = new DriveBase("drive base", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2); //needs actual values
+    	db = new DriveBase("driveBase", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2); //needs actual values
     	d = new Drive("dive", 4, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2); //needs actual values
     	t = new Turn("turn", 5, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2); //needs actual values
     	a = new BallDoor("auger", 6, appendageController, ballDoor); //needs actual values
