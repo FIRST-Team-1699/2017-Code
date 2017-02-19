@@ -11,6 +11,7 @@ import org.usfirst.frc.team1699.robot.commands.Pickup;
 import org.usfirst.frc.team1699.robot.commands.Turn;
 import org.usfirst.frc.team1699.utils.command.AutoCommandMap;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
+import org.usfirst.frc.team1699.robot.commands.Agitator;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -33,6 +34,7 @@ public class Robot extends IterativeRobot {
 	private Climber c;
 	private AutoCommandMap map;
 	private Compressor comp;
+	private Agitator e;
 	
 	private VictorSP pickup;
 	private VictorSP shooter;
@@ -46,6 +48,7 @@ public class Robot extends IterativeRobot {
 	
 	private DoubleSolenoid gearManipulator;
 	private DoubleSolenoid ballDoor;
+	private DoubleSolenoid agitator;
 	
 	private XboxController driverController;
 	private XboxController appendageController;
@@ -73,6 +76,7 @@ public class Robot extends IterativeRobot {
     	
     	gearManipulator = new DoubleSolenoid(Constants.GEAR_MANIPULATOR_SOLENOID_OPEN, Constants.GEAR_MANIPULATOR_SOLENOID_CLOSE);
     	ballDoor = new DoubleSolenoid(Constants.BALL_DOOR_SOLENOID_OPEN, Constants.BALL_DOOR_SOLENOID_CLOSE);
+    	agitator = new DoubleSolenoid(Constants.AGITATOR_SOLENOID_OPEN, Constants.AGITATOR_SOLENOID_CLOSE);
     	
     	//this might not be right
     	enc1 = new Encoder(Constants.ENCODER1_1, Constants.ENCODER1_2, false, Encoder.EncodingType.k4X);
@@ -82,14 +86,15 @@ public class Robot extends IterativeRobot {
     	map = new AutoCommandMap();
     	
     	//define and instantiate commands
-    	p = new Pickup("pickup", 0, appendageController, pickup); //needs actual values
-    	g = new GearManipulator("gear", 1, appendageController, gearManipulator); //needs actual values (does not have toggle param)
-    	b = new BallShooter("shooter", 2, appendageController, shooter); //needs actual values
-    	db = new DriveBase("driveBase", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2); //needs actual values
-    	d = new Drive("drive", 4, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2); //needs actual values
-    	t = new Turn("turn", 5, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2); //needs actual values
-    	a = new BallDoor("auger", 6, appendageController, ballDoor); //needs actual values
-    	c = new Climber("climber", 7, appendageController, climber1, climber2, comp); //needs actual values (does not have toggle param)
+    	p = new Pickup("pickup", 0, appendageController, pickup);
+    	g = new GearManipulator("gear", 1, appendageController, gearManipulator); //does not have toggle
+    	b = new BallShooter("shooter", 2, appendageController, shooter);
+    	db = new DriveBase("driveBase", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2);
+    	d = new Drive("drive", 4, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2);
+    	t = new Turn("turn", 5, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2);
+    	a = new BallDoor("auger", 6, appendageController, ballDoor);
+    	c = new Climber("climber", 7, appendageController, climber1, climber2, comp); //does not have toggle
+    	e = new Agitator("agitator", 8, appendageController, agitator);
     	
     	//add commands to map
     	map.addEntry(g.getName(), g);
@@ -97,6 +102,7 @@ public class Robot extends IterativeRobot {
     	map.addEntry(d.getName(), d);
     	map.addEntry(t.getName(), t);
     	map.addEntry(a.getName(), a);
+    	map.addEntry(c.getName(), e);
     	
     }
 
@@ -127,6 +133,7 @@ public class Robot extends IterativeRobot {
     	db.run();
     	a.run();
     	c.run();
+    	e.run();
     }
     
     public void testPeriodic() {
