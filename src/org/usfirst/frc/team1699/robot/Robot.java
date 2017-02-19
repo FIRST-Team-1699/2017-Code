@@ -9,9 +9,9 @@ import org.usfirst.frc.team1699.robot.commands.DriveBase;
 import org.usfirst.frc.team1699.robot.commands.GearManipulator;
 import org.usfirst.frc.team1699.robot.commands.Pickup;
 import org.usfirst.frc.team1699.robot.commands.Turn;
+import org.usfirst.frc.team1699.robot.commands.Agitator;
 import org.usfirst.frc.team1699.utils.command.AutoCommandMap;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
-import org.usfirst.frc.team1699.robot.commands.Agitator;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
