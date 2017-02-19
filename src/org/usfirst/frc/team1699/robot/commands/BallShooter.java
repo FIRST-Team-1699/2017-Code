@@ -54,11 +54,11 @@ public class BallShooter extends Command implements AutoCommand{
 	 */
 	@Override
 	public void run() {
-		if(xBox.getLeftBumper()){
-			stopShooter();
-		}
-		else if(xBox.getRightBumper()){
+		if(xBox.getRightBumper()){
 			startShooter(MOTOR_SPEED);
+		}
+		else()){
+			stopShooter();
 		}
 	}
 
