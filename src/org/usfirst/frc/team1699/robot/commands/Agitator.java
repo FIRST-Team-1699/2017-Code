@@ -23,8 +23,8 @@ public class Agitator extends Command implements AutoCommand{
 	 */
 	public Agitator(String name, int id, XboxController xbox, DoubleSolenoid solenoid){
 		super(name, id);
-		this.solenoid = solenoid;
 		this.xbox = xbox;
+		this.solenoid = solenoid;
 	
 	}
 	
