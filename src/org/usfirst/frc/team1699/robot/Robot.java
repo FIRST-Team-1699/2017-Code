@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.TalonSRX;
+import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.VictorSP;
 
 public class Robot extends IterativeRobot {
@@ -41,10 +41,10 @@ public class Robot extends IterativeRobot {
 	private VictorSP climber1;
 	private VictorSP climber2;
 	
-	private TalonSRX driveLeft1;
-	private TalonSRX driveLeft2;
-	private TalonSRX driveRight1;
-	private TalonSRX driveRight2;
+	private CANTalon driveLeft1;
+	private CANTalon driveLeft2;
+	private CANTalon driveRight1;
+	private CANTalon driveRight2;
 	
 	private DoubleSolenoid gearManipulator;
 	private DoubleSolenoid ballDoor;
@@ -69,10 +69,10 @@ public class Robot extends IterativeRobot {
     	climber1 = new VictorSP(Constants.MOTOR_CLIMBER1);
     	climber2 = new VictorSP(Constants.MOTOR_CLIMBER2);
     	
-    	driveLeft1 = new TalonSRX(Constants.MOTOR_DRIVE_LEFT1);
-    	driveLeft2 = new TalonSRX(Constants.MOTOR_DRIVE_LEFT2);
-    	driveRight1 = new TalonSRX(Constants.MOTOR_DRIVE_RIGHT1);
-    	driveRight2 = new TalonSRX(Constants.MOTOR_DRIVE_RIGHT2);
+    	driveLeft1 = new CANTalon(Constants.MOTOR_DRIVE_LEFT1);
+    	driveLeft2 = new CANTalon(Constants.MOTOR_DRIVE_LEFT2);
+    	driveRight1 = new CANTalon(Constants.MOTOR_DRIVE_RIGHT1);
+    	driveRight2 = new CANTalon(Constants.MOTOR_DRIVE_RIGHT2);
     	
     	gearManipulator = new DoubleSolenoid(Constants.GEAR_MANIPULATOR_SOLENOID_OPEN, Constants.GEAR_MANIPULATOR_SOLENOID_CLOSE);
     	ballDoor = new DoubleSolenoid(Constants.BALL_DOOR_SOLENOID_OPEN, Constants.BALL_DOOR_SOLENOID_CLOSE);
