@@ -75,35 +75,35 @@ public class Robot extends IterativeRobot {
     	driveRight1 = new CANTalon(Constants.MOTOR_DRIVE_RIGHT1);
     	driveRight2 = new CANTalon(Constants.MOTOR_DRIVE_RIGHT2);
     	
-    	//gearManipulator = new DoubleSolenoid(Constants.GEAR_MANIPULATOR_SOLENOID_OPEN, Constants.GEAR_MANIPULATOR_SOLENOID_CLOSE);
-    	//ballDoor = new DoubleSolenoid(Constants.BALL_DOOR_SOLENOID_OPEN, Constants.BALL_DOOR_SOLENOID_CLOSE);
-    	//agitator = new DoubleSolenoid(Constants.AGITATOR_SOLENOID_OPEN, Constants.AGITATOR_SOLENOID_CLOSE);
+    	gearManipulator = new DoubleSolenoid(Constants.GEAR_MANIPULATOR_SOLENOID_OPEN, Constants.GEAR_MANIPULATOR_SOLENOID_CLOSE);
+    	ballDoor = new DoubleSolenoid(Constants.BALL_DOOR_SOLENOID_OPEN, Constants.BALL_DOOR_SOLENOID_CLOSE);
+        agitator = new DoubleSolenoid(Constants.AGITATOR_SOLENOID_OPEN, Constants.AGITATOR_SOLENOID_CLOSE);
     	
     	//this might not be right
-    	//enc1 = new Encoder(Constants.ENCODER1_1, Constants.ENCODER1_2, false, Encoder.EncodingType.k4X);
-    	//enc2 = new Encoder(Constants.ENCODER2_1, Constants.ENCODER2_2, true, Encoder.EncodingType.k4X);
+    	enc1 = new Encoder(Constants.ENCODER1_1, Constants.ENCODER1_2, false, Encoder.EncodingType.k4X);
+    	enc2 = new Encoder(Constants.ENCODER2_1, Constants.ENCODER2_2, true, Encoder.EncodingType.k4X);
     	
     	//instantiate map
-    	//map = new AutoCommandMap();
+    	map = new AutoCommandMap();
     	
     	//define and instantiate commands
-    	//p = new Pickup("pickup", 0, appendageController, pickup);
-    	//g = new GearManipulator("gear", 1, appendageController, gearManipulator); //does not have toggle
-    	//b = new BallShooter("shooter", 2, appendageController, shooter);
-    	//db = new DriveBase("driveBase", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2);
-    	//d = new Drive("drive", 4, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2);
-    	//t = new Turn("turn", 5, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2);
-    	//a = new BallDoor("auger", 6, appendageController, ballDoor);
-    	//c = new Climber("climber", 7, appendageController, climber1, climber2, comp); //does not have toggle
-    	//e = new Agitator("agitator", 8, appendageController, agitator);
+    	p = new Pickup("pickup", 0, appendageController, pickup);
+    	g = new GearManipulator("gear", 1, appendageController, gearManipulator); //does not have toggle
+    	b = new BallShooter("shooter", 2, appendageController, shooter);
+    	db = new DriveBase("driveBase", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2);
+    	d = new Drive("drive", 4, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2);
+    	t = new Turn("turn", 5, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2);
+    	a = new BallDoor("auger", 6, appendageController, ballDoor);
+    	c = new Climber("climber", 7, appendageController, climber1, climber2, comp); //does not have toggle
+    	e = new Agitator("agitator", 8, appendageController, agitator);
     	
     	//add commands to map
-    	//map.addEntry(g.getName(), g);
-    	//map.addEntry(b.getName(), b);
-    	//map.addEntry(d.getName(), d);
-    	//map.addEntry(t.getName(), t);
-    	//map.addEntry(a.getName(), a);
-    	//map.addEntry(c.getName(), e);
+    	map.addEntry(g.getName(), g);
+    	map.addEntry(b.getName(), b);
+    	map.addEntry(d.getName(), d);
+    	map.addEntry(t.getName(), t);
+    	map.addEntry(a.getName(), a);
+    	map.addEntry(c.getName(), e);
     	
     }
     
@@ -132,13 +132,13 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopPeriodic() {
-    	//p.run();
-    	//g.run();
-    	//b.run();
-    	//db.run();
-    	//a.run();
-    	//c.run();
-    	//e.run();
+    	p.run();
+    	g.run();
+    	b.run();
+    	db.run();
+    	a.run();
+    	c.run();
+    	e.run();
     }
     
     public void testPeriodic() {
