@@ -10,6 +10,7 @@ public class DriveBase extends Command{
 	private SpeedController mot1, mot2, mot3, mot4;
 	private XboxController xBox;
 	private RobotDrive drive;
+	private double rotateValue = 0;
 
 	/**
 	 * Constructor for the DriveBase class
@@ -44,8 +45,8 @@ public class DriveBase extends Command{
 	 * Allows the joystick to be used for driving
 	 */
 	@Override
-	public void run() {
-		drive.arcadeDrive(xBox);
+	public void run(){
+		drive.tankDrive(xBox.getLeftYAxis() * -1, xBox.getRightYAxis() * -1);
 	}
 
 	@Override
