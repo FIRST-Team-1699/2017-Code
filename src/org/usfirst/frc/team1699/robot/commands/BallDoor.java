@@ -2,12 +2,10 @@ package org.usfirst.frc.team1699.robot.commands;
 
 import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
 import org.usfirst.frc.team1699.utils.command.Command;
-import org.usfirst.frc.team1699.utils.drive.TimeControlledMotor;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.SpeedController;
 
 public class BallDoor extends Command implements AutoCommand{
 	private XboxController xbox;
@@ -24,7 +22,6 @@ public class BallDoor extends Command implements AutoCommand{
 	public BallDoor(String name, int id, XboxController xbox, DoubleSolenoid solenoid){
 		super(name, id);
 		this.solenoid = solenoid;
-		//this.solenoid2 = solenoid2;
 		this.xbox = xbox;
 	
 	}

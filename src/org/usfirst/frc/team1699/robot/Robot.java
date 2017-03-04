@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.VictorSP;
@@ -47,6 +48,7 @@ public class Robot extends IterativeRobot {
 	private CANTalon driveRight2;
 	
 	private DoubleSolenoid gearManipulator;
+	
 	private DoubleSolenoid ballDoor;
 	private DoubleSolenoid agitator;
 	
@@ -56,8 +58,9 @@ public class Robot extends IterativeRobot {
 	private Encoder enc1;
 	private Encoder enc2;
 	
+	private RobotDrive rd;
+	
     public void robotInit() {
-    	
     	Solenoid.setDefaultSolenoidModule(0);
     	comp = new Compressor(0);
     	comp.start();
@@ -90,7 +93,8 @@ public class Robot extends IterativeRobot {
     	p = new Pickup("pickup", 0, appendageController, pickup);
     	g = new GearManipulator("gear", 1, appendageController, gearManipulator); //does not have toggle
     	b = new BallShooter("shooter", 2, appendageController, shooter);
-    	db = new DriveBase("driveBase", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2);
+    	//db = new DriveBase("driveBase", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2);
+    	rd = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
     	d = new Drive("drive", 4, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2);
     	t = new Turn("turn", 5, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2);
     	a = new BallDoor("auger", 6, appendageController, ballDoor);
@@ -102,9 +106,14 @@ public class Robot extends IterativeRobot {
     	map.addEntry(b.getName(), b);
     	map.addEntry(d.getName(), d);
     	map.addEntry(t.getName(), t);
+    	
     	map.addEntry(a.getName(), a);
     	map.addEntry(c.getName(), e);
     	
+    	System.out.println(driveLeft1);
+    	System.out.println(driveLeft2);
+    	System.out.println(driveRight1);
+    	System.out.println(driveRight2);
     }
     
     public void robotPeriodic(){
@@ -135,10 +144,11 @@ public class Robot extends IterativeRobot {
     	p.run();
     	g.run();
     	b.run();
-    	db.run();
+    	//db.run();
     	a.run();
     	c.run();
     	e.run();
+    	rd.arcadeDrive(driverController);
     }
     
     public void testPeriodic() {

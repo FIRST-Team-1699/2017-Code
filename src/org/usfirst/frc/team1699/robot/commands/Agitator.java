@@ -2,12 +2,10 @@ package org.usfirst.frc.team1699.robot.commands;
 
 import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
 import org.usfirst.frc.team1699.utils.command.Command;
-import org.usfirst.frc.team1699.utils.drive.TimeControlledMotor;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.SpeedController;
 
 public class Agitator extends Command implements AutoCommand{
 	private XboxController xbox;
