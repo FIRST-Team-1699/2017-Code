@@ -38,10 +38,9 @@ public class Pickup extends Command{
 	public void run() {
 		if (controller.getA()){ //check to see if the button A is pressed
 			motor.set(MOTOR_SPEED);  //turns motor on
-			}
-		else if (controller.getB()){ //check to see if the button B is pressed
-			motor.set(0);  //turns motor off
-			}
+		}else{
+			motor.set(0);
+		}
 	}
 	
 	@Override

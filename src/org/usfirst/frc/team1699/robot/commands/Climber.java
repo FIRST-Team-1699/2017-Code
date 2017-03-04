@@ -102,7 +102,8 @@ public class Climber extends Command{
 	public void init() {
 		// TODO Auto-generated method stub
 		compressor.start();
-
+		sController1.setInverted(true);
+		sController2.setInverted(true);
 	}
 	
 	/**

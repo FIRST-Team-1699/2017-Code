@@ -35,7 +35,7 @@ public class Agitator extends Command implements AutoCommand{
 	public void run() {
 		if(xbox.getLeftBumper()){
 			solenoid.set(Value.kForward);
-		}else{
+		}else if(xbox.getRightBumper()){
 			solenoid.set(Value.kReverse);
 		}
 	}
