@@ -26,21 +26,6 @@ public class BallShooter extends Command implements AutoCommand{
 		this.xBox = xBox;
 
 	}
-	
-	/**
-	 * sets motor speed to 0
-	 */
-	private void stopShooter(){
-		speedController.set(0);
-	}
-	
-	/**
-	 * runs motor at set speed
-	 * @param speed motor speed(-1.0 to 1.0)
-	 */
-	private void startShooter(double speed){
-		speedController.set(speed);
-	}
 
 	@Override
 	public void init() {
@@ -55,9 +40,9 @@ public class BallShooter extends Command implements AutoCommand{
 	@Override
 	public void run() {
 		if(xBox.getRightBumper()){
-			startShooter(MOTOR_SPEED);
+			speedController.set(MOTOR_SPEED);
 		}else{
-			stopShooter();
+			speedController.set(0);
 		}
 	}
 

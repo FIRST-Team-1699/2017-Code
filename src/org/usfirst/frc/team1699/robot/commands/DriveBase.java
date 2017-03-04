@@ -36,6 +36,7 @@ public class DriveBase extends Command{
 	 */
 	@Override
 	public void init() {
+		//Fix which motor is which
 		drive = new RobotDrive(mot1, mot2, mot3, mot4);
 	}
 
