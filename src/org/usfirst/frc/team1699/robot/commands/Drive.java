@@ -5,7 +5,6 @@ import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Timer;
 
 public class Drive extends DriveBase implements AutoCommand{
 	private Encoder sen;

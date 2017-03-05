@@ -10,7 +10,6 @@ public class DriveBase extends Command{
 	private SpeedController mot1, mot2, mot3, mot4;
 	private XboxController xBox;
 	private RobotDrive drive;
-	private double rotateValue = 0;
 
 	/**
 	 * Constructor for the DriveBase class

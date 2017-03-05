@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 
 public class LineUp extends Command implements AutoCommand{
-	private Gyro gyro;
 	private RobotDrive drive;
 	private PIDLoop pid;
 	private XboxController xbox;
@@ -18,9 +17,8 @@ public class LineUp extends Command implements AutoCommand{
 	public static final int TARGET_CENTER_X = 180;
 	private double initX = table.getNumber("centerX", 0.0);
 
-	public LineUp(String name, int id, Gyro gyro, RobotDrive drive, PIDLoop pid, XboxController xbox, NetworkTable table) {
+	public LineUp(String name, int id, RobotDrive drive, PIDLoop pid, XboxController xbox, NetworkTable table) {
 		super(name, id);
-		this.gyro = gyro;
 		this.drive = drive;
 		this.pid = pid;
 		this.xbox = xbox;
