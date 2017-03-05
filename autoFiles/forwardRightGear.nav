@@ -1,0 +1,5 @@
+drive until 20 at 0.6
+turn until -20
+gear at 1.0
+sleep for 100
+drive until 20 at -0.6

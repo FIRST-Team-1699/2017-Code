@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1699.robot;
 
+import org.usfirst.frc.team1699.robot.commands.Agitator;
 import org.usfirst.frc.team1699.robot.commands.BallDoor;
 import org.usfirst.frc.team1699.robot.commands.BallShooter;
 import org.usfirst.frc.team1699.robot.commands.Climber;
@@ -8,10 +9,12 @@ import org.usfirst.frc.team1699.robot.commands.Drive;
 import org.usfirst.frc.team1699.robot.commands.DriveBase;
 import org.usfirst.frc.team1699.robot.commands.GearManipulator;
 import org.usfirst.frc.team1699.robot.commands.Pickup;
+import org.usfirst.frc.team1699.robot.commands.Sleep;
 import org.usfirst.frc.team1699.robot.commands.Turn;
-import org.usfirst.frc.team1699.robot.commands.Agitator;
 import org.usfirst.frc.team1699.utils.command.AutoCommandMap;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
+
+import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -19,7 +22,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
-import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.VictorSP;
 
 public class Robot extends IterativeRobot {
@@ -36,6 +38,7 @@ public class Robot extends IterativeRobot {
 	private AutoCommandMap map;
 	private Compressor comp;
 	private Agitator e;
+	private Sleep s;
 	
 	private VictorSP pickup;
 	private VictorSP shooter;
@@ -100,6 +103,8 @@ public class Robot extends IterativeRobot {
     	a = new BallDoor("auger", 6, appendageController, ballDoor);
     	c = new Climber("climber", 7, appendageController, climber1, climber2, comp); //does not have toggle
     	e = new Agitator("agitator", 8, appendageController, agitator);
+    	s = new Sleep("sleep", 9);
+    	
     	
     	//add commands to map
     	map.addEntry(g.getName(), g);
