@@ -114,11 +114,7 @@ public class Robot extends IterativeRobot {
     	
     	map.addEntry(a.getName(), a);
     	map.addEntry(c.getName(), e);
-    	
-    	System.out.println(driveLeft1);
-    	System.out.println(driveLeft2);
-    	System.out.println(driveRight1);
-    	System.out.println(driveRight2);
+    	map.addEntry(s.getName(), s);
     }
     
     public void robotPeriodic(){
@@ -142,18 +138,24 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-    	
+    	p.init();
+    	g.init();
+    	b.init();
+    	db.init();
+    	a.init();
+    	c.init();
+    	e.init();
     }
 
     public void teleopPeriodic() {
     	p.run();
     	g.run();
     	b.run();
-    	//db.run();
+    	db.run(); //Might break
     	a.run();
     	c.run();
     	e.run();
-    	rd.arcadeDrive(driverController);
+    	//rd.arcadeDrive(driverController);
     }
     
     public void testPeriodic() {
