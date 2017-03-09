@@ -1,7 +1,5 @@
 # 2017-Code
 
-Code for the 2017 robot.
+Code for the 2017 robot, made to compete in Steamworks. 
 
-Written in Java
-
-Currently untested
+You can find this robot's results on [The Blue Alliance](http://www.thebluealliance.com/team/1699/2017).
