@@ -1,13 +1,15 @@
 package org.usfirst.frc.team1699.robot.commands;
 
 import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
+import org.usfirst.frc.team1699.utils.command.Command;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.RobotDrive;
 
-public class Drive extends DriveBase implements AutoCommand{
+public class Drive extends Command implements AutoCommand{
 	private Encoder sen;
+	private RobotDrive drive;
 
 	/**
 	 * Constructor for the Drive class
@@ -22,9 +24,10 @@ public class Drive extends DriveBase implements AutoCommand{
 	 * @param sen
 	 * @param sen2
 	 */
-	public Drive(String name, int id, XboxController xBox, SpeedController mot1, SpeedController mot2, SpeedController mot3, SpeedController mot4, Encoder sen, Encoder sen2) {
-		super(name, id, xBox, mot1, mot2, mot3, mot4);
+	public Drive(String name, int id, XboxController xBox, RobotDrive drive, Encoder sen, Encoder sen2) {
+		super(name, id);
 		this.sen = sen;
+		this.drive = drive;
 	}
 
 	/**
@@ -36,13 +39,14 @@ public class Drive extends DriveBase implements AutoCommand{
 	 */
 	@Override
 	public void runAuto(double distance, double speed, boolean useSensor) {
-		super.getDrive().setMaxOutput(speed);
+		System.out.println(distance + " " + speed + " " + useSensor);
+		drive.setMaxOutput(speed);
 		if(useSensor){
 			driveSensorBased(distance, speed);
 		}else{
 			driveTimeBased(distance, speed);
 		}
-		super.getDrive().setMaxOutput(1.0);
+		drive.setMaxOutput(1.0);
 	}
 	
 	/**
@@ -54,7 +58,7 @@ public class Drive extends DriveBase implements AutoCommand{
 	private void driveTimeBased(double distance, double speed){
 		int i = 0;
 		while(i <= distance){
-			super.getDrive().tankDrive(speed, speed);
+			drive.tankDrive(speed, speed);
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
@@ -62,7 +66,7 @@ public class Drive extends DriveBase implements AutoCommand{
 			}
 			i++;
 		}
-		super.getDrive().tankDrive(0, 0);
+		drive.tankDrive(0, 0);
 	}
 	
 	/**
@@ -73,14 +77,14 @@ public class Drive extends DriveBase implements AutoCommand{
 	 */
 	private void driveSensorBased(double distance, double speed){
 		while(sen.get() <= distance){
-			super.getDrive().tankDrive(speed, speed);
+			drive.tankDrive(speed, speed);
 			try {
 				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		super.getDrive().tankDrive(0, 0);
+		drive.tankDrive(0, 0);
 	}
 
 	/**
@@ -96,9 +100,26 @@ public class Drive extends DriveBase implements AutoCommand{
 	/**
 	 * Resets all sensors
 	 */
-	@Override
 	public void zeroAllSensors(){
 		sen.reset();
+	}
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void outputToDashboard() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

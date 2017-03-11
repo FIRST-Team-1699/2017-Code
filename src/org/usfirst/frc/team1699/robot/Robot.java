@@ -11,6 +11,7 @@ import org.usfirst.frc.team1699.robot.commands.GearManipulator;
 import org.usfirst.frc.team1699.robot.commands.Pickup;
 import org.usfirst.frc.team1699.robot.commands.Sleep;
 import org.usfirst.frc.team1699.robot.commands.Turn;
+import org.usfirst.frc.team1699.utils.autonomous.AutoScriptReader;
 import org.usfirst.frc.team1699.utils.command.AutoCommandMap;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
 
@@ -63,6 +64,8 @@ public class Robot extends IterativeRobot {
 	
 	private RobotDrive rd;
 	
+	private AutoScriptReader path;
+	
     public void robotInit() {
     	Solenoid.setDefaultSolenoidModule(0);
     	comp = new Compressor(0);
@@ -96,10 +99,10 @@ public class Robot extends IterativeRobot {
     	p = new Pickup("pickup", 0, appendageController, pickup);
     	g = new GearManipulator("gear", 1, appendageController, gearManipulator); //does not have toggle
     	b = new BallShooter("shooter", 2, appendageController, shooter);
-    	//db = new DriveBase("driveBase", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2);
+    	db = new DriveBase("driveBase", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2);
     	rd = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
-    	d = new Drive("drive", 4, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2);
-    	t = new Turn("turn", 5, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2, enc1, enc2);
+    	d = new Drive("drive", 4, driverController, rd, enc1, enc2);
+    	t = new Turn("turn", 5, driverController, rd, enc1, enc2);
     	a = new BallDoor("auger", 6, appendageController, ballDoor);
     	c = new Climber("climber", 7, appendageController, climber1, climber2, comp); //does not have toggle
     	e = new Agitator("agitator", 8, appendageController, agitator);
@@ -115,6 +118,15 @@ public class Robot extends IterativeRobot {
     	map.addEntry(a.getName(), a);
     	map.addEntry(c.getName(), e);
     	map.addEntry(s.getName(), s);
+    	path = new AutoScriptReader("/home/lvuser/forwardGear.nav", map);
+    	
+    	p.init();
+    	g.init();
+    	b.init();
+    	db.init();
+    	a.init();
+    	c.init();
+    	e.init();
     }
     
     public void robotPeriodic(){
@@ -130,7 +142,8 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-        
+        path.runScript();
+        System.out.println("IT WORKED AYYYYYYYYYY");
     }
     
     public void autonomousPeriodic() {
@@ -138,13 +151,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
-    	p.init();
-    	g.init();
-    	b.init();
-    	db.init();
-    	a.init();
-    	c.init();
-    	e.init();
+    	
     }
 
     public void teleopPeriodic() {

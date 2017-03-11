@@ -1,13 +1,15 @@
 package org.usfirst.frc.team1699.robot.commands;
 
 import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
+import org.usfirst.frc.team1699.utils.command.Command;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.RobotDrive;
 
-public class Turn extends DriveBase implements AutoCommand{
+public class Turn extends Command implements AutoCommand{
 	private Encoder sen;
+	private RobotDrive drive;
 
 	/**
 	 * Constructor for the Turn class
@@ -21,8 +23,9 @@ public class Turn extends DriveBase implements AutoCommand{
 	 * @param mot4
 	 * @param sen
 	 */
-	public Turn(String name, int id, XboxController xBox, SpeedController mot1, SpeedController mot2, SpeedController mot3, SpeedController mot4, Encoder sen, Encoder sen2) {
-		super(name, id, xBox, mot1, mot2, mot3, mot4);
+	public Turn(String name, int id, XboxController xBox, RobotDrive drive, Encoder sen, Encoder sen2) {
+		super(name, id);
+		this.drive = drive;
 		this.sen = sen;
 	}
 
@@ -35,13 +38,13 @@ public class Turn extends DriveBase implements AutoCommand{
 	 */
 	@Override
 	public void runAuto(double distance, double speed, boolean useSensor) {
-		super.getDrive().setMaxOutput(speed);
+		drive.setMaxOutput(speed);
 		if(useSensor){
 			driveSensorBased(distance, speed);
 		}else{
 			driveTimeBased(distance, speed);
 		}
-		super.getDrive().setMaxOutput(1.0);
+		drive.setMaxOutput(1.0);
 	}
 	
 	/**
@@ -55,9 +58,9 @@ public class Turn extends DriveBase implements AutoCommand{
 		double dist = Math.abs(distance);
 		while(i <= dist){
 			if(distance < 0){
-				super.getDrive().tankDrive(speed, -speed);
+				drive.tankDrive(speed, -speed);
 			}else{
-				super.getDrive().tankDrive(-speed, speed);
+				drive.tankDrive(-speed, speed);
 			}
 			try {
 				Thread.sleep(100);
@@ -66,7 +69,7 @@ public class Turn extends DriveBase implements AutoCommand{
 			}
 			i++;
 		}
-		super.getDrive().tankDrive(0, 0);
+		drive.tankDrive(0, 0);
 	}
 	
 	/**
@@ -79,9 +82,9 @@ public class Turn extends DriveBase implements AutoCommand{
 		double dist = Math.abs(distance);
 		while(sen.get() <= dist){
 			if(distance < 0){
-				super.getDrive().tankDrive(speed, -speed);
+				drive.tankDrive(speed, -speed);
 			}else{
-				super.getDrive().tankDrive(-speed, speed);
+				drive.tankDrive(-speed, speed);
 			}
 			try {
 				Thread.sleep(10);
@@ -89,7 +92,7 @@ public class Turn extends DriveBase implements AutoCommand{
 				e.printStackTrace();
 			}
 		}
-		super.getDrive().tankDrive(0, 0);
+		drive.tankDrive(0, 0);
 	}
 
 	/**
@@ -100,6 +103,30 @@ public class Turn extends DriveBase implements AutoCommand{
 	@Override
 	public boolean autoCommandDone() {
 		return false;
+	}
+
+	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void outputToDashboard() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void zeroAllSensors() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

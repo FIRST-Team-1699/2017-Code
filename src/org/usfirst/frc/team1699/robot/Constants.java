@@ -24,4 +24,6 @@ public class Constants {
 	public static final int ENCODER1_2 = 1;
 	public static final int ENCODER2_1 = 2;
 	public static final int ENCODER2_2 = 3;
+	
+	public static final String forwardGearPath = "forwardGear.nav";
 }
