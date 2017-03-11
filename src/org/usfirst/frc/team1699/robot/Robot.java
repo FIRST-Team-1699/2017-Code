@@ -104,7 +104,7 @@ public class Robot extends IterativeRobot {
     	d = new Drive("drive", 4, driverController, rd, enc1, enc2);
     	t = new Turn("turn", 5, driverController, rd, enc1, enc2);
     	a = new BallDoor("auger", 6, appendageController, ballDoor);
-    	c = new Climber("climber", 7, appendageController, climber1, climber2, comp); //does not have toggle
+    	c = new Climber("climber", 7, appendageController, climber1, climber2); //does not have toggle
     	e = new Agitator("agitator", 8, appendageController, agitator);
     	s = new Sleep("sleep", 9);
     	
