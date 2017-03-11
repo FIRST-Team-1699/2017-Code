@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1699.robot.commands;
 
 import org.usfirst.frc.team1699.robot.pid.PIDLoop;
+import org.usfirst.frc.team1699.robot.pid.sensors.PIDGyro;
 import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
 import org.usfirst.frc.team1699.utils.command.Command;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
@@ -14,15 +15,17 @@ public class LineUp extends Command implements AutoCommand{
 	private PIDLoop pid;
 	private XboxController xbox;
 	private NetworkTable table;
+	private PIDGyro gyro;
 	public static final int TARGET_CENTER_X = 180;
 	private double initX = table.getNumber("centerX", 0.0);
 
-	public LineUp(String name, int id, RobotDrive drive, PIDLoop pid, XboxController xbox, NetworkTable table) {
+	public LineUp(String name, int id, RobotDrive drive, XboxController xbox, NetworkTable table, PIDGyro gyro) {
 		super(name, id);
 		this.drive = drive;
-		this.pid = pid;
+		this.pid = new PIDLoop("gyro_loop", 34, 0,0,0, gyro);
 		this.xbox = xbox;
 		this.table = table;
+		this.gyro = gyro;
 	}
 	
 	@Override
@@ -39,9 +42,8 @@ public class LineUp extends Command implements AutoCommand{
 
 	@Override
 	public void runAuto(double distance, double speed, boolean useSensor) {
-		if(xbox.getBack()){
+		
 			drive.arcadeDrive(0, pid.output());
-		}
 	}
 
 	@Override
