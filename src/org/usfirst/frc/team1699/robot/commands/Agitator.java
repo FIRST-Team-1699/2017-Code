@@ -33,9 +33,9 @@ public class Agitator extends Command implements AutoCommand{
 	
 	@Override
 	public void run() {
-		if(xbox.getLeftBumper()){
+		if(xbox.getDPadUp()){
 			solenoid.set(Value.kForward);
-		}else if(xbox.getRightBumper()){
+		}else if(xbox.getDPadDown()){
 			solenoid.set(Value.kReverse);
 		}
 	}

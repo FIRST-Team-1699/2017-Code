@@ -66,9 +66,11 @@ public class Robot extends IterativeRobot {
 	
 	private AutoScriptReader path;
 	
+	private double autoTime;
+	
     public void robotInit() {
-    	Solenoid.setDefaultSolenoidModule(0);
-    	comp = new Compressor(0);
+    	Solenoid.setDefaultSolenoidModule(25);
+    	comp = new Compressor(25);
     	comp.start();
     	
     	driverController = new XboxController(0, 0.1);
@@ -104,7 +106,7 @@ public class Robot extends IterativeRobot {
     	d = new Drive("drive", 4, driverController, rd, enc1, enc2);
     	t = new Turn("turn", 5, driverController, rd, enc1, enc2);
     	a = new BallDoor("auger", 6, appendageController, ballDoor);
-    	c = new Climber("climber", 7, appendageController, climber1, climber2); //does not have toggle
+    	c = new Climber("climber", 7, driverController, climber1, climber2); //does not have toggle
     	e = new Agitator("agitator", 8, appendageController, agitator);
     	s = new Sleep("sleep", 9);
     	
@@ -127,6 +129,8 @@ public class Robot extends IterativeRobot {
     	a.init();
     	c.init();
     	e.init();
+    	
+    	autoTime = 3000;
     }
     
     public void robotPeriodic(){
@@ -147,7 +151,10 @@ public class Robot extends IterativeRobot {
     }
     
     public void autonomousPeriodic() {
-    	
+    	if (autoTime >= 0){
+    		rd.tankDrive(.6, .6);
+    	}
+    	autoTime -= 20;
     }
 
     public void teleopInit() {

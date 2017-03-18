@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 public class BallShooter extends Command implements AutoCommand{
 	private SpeedController speedController;
 	private XboxController xBox;
-	private final double MOTOR_SPEED = .5;
+	private final double MOTOR_SPEED = .8;
 	
 	/**
 	 * constructor
@@ -29,7 +29,7 @@ public class BallShooter extends Command implements AutoCommand{
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
+		speedController.setInverted(true);
 		 
 	}
 

@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 public class Pickup extends Command{
 	private XboxController controller;
 	private SpeedController motor;
-	private final double MOTOR_SPEED = 0.5;
+	private final double MOTOR_SPEED = 1.00;
 	
 	/**
 	 * Constructor for the Pickup class
@@ -32,11 +32,11 @@ public class Pickup extends Command{
 	}
 	
 	/**
-	 * Turns the motor on or off depending on which button is pressed
+	 * Turns the motor on or off depending on if button is pressed
 	 */
 	@Override
 	public void run() {
-		if (controller.getA()){ //check to see if the button A is pressed
+		if (controller.getRawButton(1)){ //check to see if the button A is pressed
 			motor.set(MOTOR_SPEED);  //turns motor on
 		}else{
 			motor.set(0);

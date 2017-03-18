@@ -58,17 +58,22 @@ public class Climber extends Command{
 	 */
 	@Override
 	public void run() {
-		if(xbox.getDPadUp()){
+		if(xbox.getRawButton(1)){ //Press A to turn motor forward and climb
 			sController1.set(speed);
 			sController2.set(speed);
 			if (speed <= 1){
 				speed += 0.01;
 			}
-		}else if(xbox.getDPadDown()){
+		}else if(xbox.getRawButton(2)){ //Press B to stop motor
 			sController1.set(0);
 			sController2.set(0);
 			speed = 0;
-		}		
+		}else if(xbox.getRawButton(3)){ //Press X to turn motor backward and descend
+			sController1.set(-speed);
+			sController2.set(-speed);
+		}
+	
+		
 	}
 
 	@Override

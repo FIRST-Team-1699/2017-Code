@@ -45,7 +45,7 @@ public class DriveBase extends Command{
 	 */
 	@Override
 	public void run(){
-		drive.tankDrive(xBox.getLeftYAxis() * -1, xBox.getRightYAxis() * -1);
+		drive.tankDrive(xBox.getRightYAxis(), xBox.getLeftYAxis()); //RightYAxis is right joystick, LeftYAxis is left joystick, move joysticks forward and back to move.
 	}
 
 	@Override
