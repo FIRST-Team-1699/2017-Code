@@ -24,6 +24,8 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 	
@@ -64,9 +66,20 @@ public class Robot extends IterativeRobot {
 	
 	private RobotDrive rd;
 	
-	private AutoScriptReader path;
+	private AutoScriptReader baseLineAuto;
+	private AutoScriptReader gearLeftAuto;
+	private AutoScriptReader gearRightAuto;
+	private AutoScriptReader gearStraightAuto;
 	
-	private double autoTime;
+	private final String gearStraight = "Gear Straight";
+	private final String gearLeft = "Gear Left";
+	private final String gearRight = "Gear Right";
+	private final String baseLine = "Base Line";
+	private String autoSelected;
+	@SuppressWarnings("rawtypes")
+	private SendableChooser autoChooser;
+	
+	@SuppressWarnings({ "rawtypes", "unchecked"})
 	
     public void robotInit() {
     	Solenoid.setDefaultSolenoidModule(25);
@@ -120,7 +133,11 @@ public class Robot extends IterativeRobot {
     	map.addEntry(a.getName(), a);
     	map.addEntry(c.getName(), e);
     	map.addEntry(s.getName(), s);
-    	path = new AutoScriptReader("/home/lvuser/forwardGear.nav", map);
+    	
+    	baseLineAuto = new AutoScriptReader("/home/lvuser/forward.nav", map);
+    	gearLeftAuto = new AutoScriptReader("/home/lvuser/forwardLeftGear.nav", map);
+        gearRightAuto = new AutoScriptReader("/home/lvuser/forwardRightGear.nav", map);
+        gearStraightAuto = new AutoScriptReader("/home/lvuser/forwardGear.nav", map);
     	
     	p.init();
     	g.init();
@@ -130,7 +147,16 @@ public class Robot extends IterativeRobot {
     	c.init();
     	e.init();
     	
-    	autoTime = 3000;
+    	System.out.println("|------------------------------------------------------|");
+    	System.out.println("| Team 1699 Robot: awating drive mode           |");
+    	System.out.println("|------------------------------------------------------|");
+    	autoChooser = new SendableChooser();
+    	autoChooser.addObject("Gear Straight",  gearStraight);
+    	autoChooser.addObject("Gear Left", gearLeft);
+    	autoChooser.addObject("Gear Right", gearRight);
+    	autoChooser.addObject("Base Line", baseLine);
+    	
+    	SmartDashboard.putData("AutoChooser", autoChooser);
     }
     
     public void robotPeriodic(){
@@ -146,16 +172,26 @@ public class Robot extends IterativeRobot {
 	}
 
     public void autonomousInit() {
-        path.runScript();
-        System.out.println("IT WORKED AYYYYYYYYYY");
+        autoSelected = (String) autoChooser.getSelected();
+        
+        System.out.println("Auto Mode: " + autoSelected);
+        
+        System.out.println("Auto Selected: " + autoSelected);
+        switch(autoSelected){
+        	case baseLine: baseLineAuto.runScript();
+        		break;
+        	case gearLeft: gearLeftAuto.runScript();
+        		break;
+        	case gearRight: gearRightAuto.runScript();
+        		break;
+        	case gearStraight: gearStraightAuto.runScript();
+        		break;
+        	default: baseLineAuto.runScript();
+        		break;
+        }
     }
     
     public void autonomousPeriodic() {
-    	if (autoTime >= 0){
-    		rd.tankDrive(.6, .6);
-    	}
-    	autoTime -= 20;
-    	
     	
     }
 

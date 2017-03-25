@@ -32,6 +32,7 @@ public class AutoScriptReader {
 		this.map = map;
 		fileAsString = AutoUtils.loadFileAsArray(path); // Sets fileAsArray list
 														// equal to the file
+		fileAsString.forEach(a -> System.out.println(a));
 	}
 
 	/**
