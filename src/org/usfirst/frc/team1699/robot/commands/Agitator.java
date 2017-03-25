@@ -33,7 +33,7 @@ public class Agitator extends Command implements AutoCommand{
 	
 	@Override
 	public void run() {
-		if(xbox.getDPadUp()){
+		if(xbox.getBack()){
 			solenoid.set(Value.kForward);
 		}else if(xbox.getDPadDown()){
 			solenoid.set(Value.kReverse);
