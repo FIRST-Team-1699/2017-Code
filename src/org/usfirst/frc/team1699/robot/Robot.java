@@ -155,6 +155,8 @@ public class Robot extends IterativeRobot {
     		rd.tankDrive(.6, .6);
     	}
     	autoTime -= 20;
+    	
+    	
     }
 
     public void teleopInit() {

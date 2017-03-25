@@ -1,4 +1,2 @@
-drive until 20 at 0.6
-gear at 1.0
-sleep for 100
-drive until 10 at -0.6
+drive until 20 at 0.6 //drive forward for 20 ticks of the encoders at .6 speed
+gear at 1.0 //release gear piston
