@@ -48,6 +48,7 @@ public class Robot extends IterativeRobot {
 	private VictorSP shooter;
 	private VictorSP climber1;
 	private VictorSP climber2;
+	private VictorSP agitator;
 	
 	private CANTalon driveLeft1;
 	private CANTalon driveLeft2;
@@ -57,7 +58,6 @@ public class Robot extends IterativeRobot {
 	private DoubleSolenoid gearManipulator;
 	
 	private DoubleSolenoid ballDoor;
-	private DoubleSolenoid agitator;
 	
 	private XboxController driverController;
 	private XboxController appendageController;
@@ -94,6 +94,7 @@ public class Robot extends IterativeRobot {
     	shooter = new VictorSP(Constants.MOTOR_SHOOTER);
     	climber1 = new VictorSP(Constants.MOTOR_CLIMBER1);
     	climber2 = new VictorSP(Constants.MOTOR_CLIMBER2);
+    	agitator = new VictorSP(Constants.MOTOR_AGITATOR);
     	
     	driveLeft1 = new CANTalon(Constants.MOTOR_DRIVE_LEFT1);
     	driveLeft2 = new CANTalon(Constants.MOTOR_DRIVE_LEFT2);
@@ -102,7 +103,6 @@ public class Robot extends IterativeRobot {
     	
     	gearManipulator = new DoubleSolenoid(Constants.GEAR_MANIPULATOR_SOLENOID_OPEN, Constants.GEAR_MANIPULATOR_SOLENOID_CLOSE);
     	ballDoor = new DoubleSolenoid(Constants.BALL_DOOR_SOLENOID_OPEN, Constants.BALL_DOOR_SOLENOID_CLOSE);
-        agitator = new DoubleSolenoid(Constants.AGITATOR_SOLENOID_OPEN, Constants.AGITATOR_SOLENOID_CLOSE);
     	
     	//this might not be right
     	enc1 = new Encoder(Constants.ENCODER1_1, Constants.ENCODER1_2, false, Encoder.EncodingType.k4X);
@@ -121,7 +121,6 @@ public class Robot extends IterativeRobot {
     	t = new Turn("turn", 5, driverController, rd, enc1, enc2);
     	//a = new BallDoor("ballDoor", 6, appendageController, ballDoor);
     	c = new Climber("climber", 7, driverController, climber1, climber2); //does not have toggle
-    	//
     	
     	e = new Agitator("agitator", 8, appendageController, agitator);
     	s = new Sleep("sleep", 9);
@@ -135,7 +134,7 @@ public class Robot extends IterativeRobot {
     	map.addEntry(t.getName(), t);
     	
     	//map.addEntry(a.getName(), a);
-    	map.addEntry(c.getName(), e);
+    	map.addEntry(e.getName(), e);
     	map.addEntry(s.getName(), s);
     	
     	baseLineAuto = new AutoScriptReader(Constants.path + Constants.forward, map);

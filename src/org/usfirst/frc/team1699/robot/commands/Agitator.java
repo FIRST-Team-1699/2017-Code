@@ -6,10 +6,11 @@ import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.SpeedController;
 
 public class Agitator extends Command implements AutoCommand{
 	private XboxController xbox;
-	private DoubleSolenoid solenoid;
+	private SpeedController cont;
 	
 	/**
 	 * Constructor for the Agitator class
@@ -19,10 +20,10 @@ public class Agitator extends Command implements AutoCommand{
 	 * @param xbox
 	 * @param solenoid
 	 */
-	public Agitator(String name, int id, XboxController xbox, DoubleSolenoid solenoid){
+	public Agitator(String name, int id, XboxController xbox, SpeedController cont){
 		super(name, id);
 		this.xbox = xbox;
-		this.solenoid = solenoid;
+		this.cont = cont;
 	
 	}
 	
@@ -34,21 +35,27 @@ public class Agitator extends Command implements AutoCommand{
 	@Override
 	public void run() {
 		if(xbox.getBack()){
-			solenoid.set(Value.kForward);
+			cont.set(0.6);
 		}else if(xbox.getDPadDown()){
-			solenoid.set(Value.kReverse);
+			cont.set(-0.6);
+		}else{
+			cont.set(0);
 		}
 	}
 
 	@Override
 	public void runAuto(double distance, double speed, boolean useSensor) {
-		if(speed == 0){
-			solenoid.set(Value.kReverse);
-		}else if(speed == 1){
-			solenoid.set(Value.kForward);
-		}else{
-			solenoid.set(Value.kOff);
+		int i = 0;
+		while(i <= distance){
+			cont.set(speed);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				e.printStackTrace();			
+			}
+			i++;
 		}
+		cont.set(0);
 	}
 
 	@Override
