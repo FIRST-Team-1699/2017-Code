@@ -8,9 +8,11 @@ import org.usfirst.frc.team1699.robot.commands.Climber;
 import org.usfirst.frc.team1699.robot.commands.Drive;
 import org.usfirst.frc.team1699.robot.commands.DriveBase;
 import org.usfirst.frc.team1699.robot.commands.GearManipulator;
+import org.usfirst.frc.team1699.robot.commands.LineUp;
 import org.usfirst.frc.team1699.robot.commands.Pickup;
 import org.usfirst.frc.team1699.robot.commands.Sleep;
 import org.usfirst.frc.team1699.robot.commands.Turn;
+import org.usfirst.frc.team1699.robot.pid.sensors.PIDVision;
 import org.usfirst.frc.team1699.utils.autonomous.AutoScriptReader;
 import org.usfirst.frc.team1699.utils.command.AutoCommandMap;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
@@ -25,6 +27,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.VictorSP;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -43,6 +46,7 @@ public class Robot extends IterativeRobot {
 	private Compressor comp;
 	private Agitator e;
 	private Sleep s;
+	private LineUp l;
 	
 	private VictorSP pickup;
 	private VictorSP shooter;
@@ -54,6 +58,9 @@ public class Robot extends IterativeRobot {
 	private CANTalon driveLeft2;
 	private CANTalon driveRight1;
 	private CANTalon driveRight2;
+	
+	private NetworkTable table;
+	private PIDVision pidVision;
 	
 	private DoubleSolenoid gearManipulator;
 	
@@ -104,6 +111,8 @@ public class Robot extends IterativeRobot {
     	gearManipulator = new DoubleSolenoid(Constants.GEAR_MANIPULATOR_SOLENOID_OPEN, Constants.GEAR_MANIPULATOR_SOLENOID_CLOSE);
     	ballDoor = new DoubleSolenoid(Constants.BALL_DOOR_SOLENOID_OPEN, Constants.BALL_DOOR_SOLENOID_CLOSE);
     	
+    	pidVision = new PIDVision();
+    	
     	//this might not be right
     	enc1 = new Encoder(Constants.ENCODER1_1, Constants.ENCODER1_2, false, Encoder.EncodingType.k4X);
     	enc2 = new Encoder(Constants.ENCODER2_1, Constants.ENCODER2_2, true, Encoder.EncodingType.k4X);
@@ -121,6 +130,7 @@ public class Robot extends IterativeRobot {
     	t = new Turn("turn", 5, driverController, rd, enc1, enc2);
     	//a = new BallDoor("ballDoor", 6, appendageController, ballDoor);
     	c = new Climber("climber", 7, driverController, climber1, climber2); //does not have toggle
+    	l = new LineUp("lineUp", 8, rd, appendageController, table, pidVision);
     	
     	e = new Agitator("agitator", 8, appendageController, agitator);
     	s = new Sleep("sleep", 9);
@@ -136,6 +146,7 @@ public class Robot extends IterativeRobot {
     	//map.addEntry(a.getName(), a);
     	map.addEntry(e.getName(), e);
     	map.addEntry(s.getName(), s);
+    	map.addEntry(l.getName(), l);
     	
     	baseLineAuto = new AutoScriptReader(Constants.path + Constants.forward, map);
     	gearLeftAuto = new AutoScriptReader(Constants.path + Constants.forwardLeftGear, map);
@@ -149,6 +160,7 @@ public class Robot extends IterativeRobot {
     	a.init();
     	c.init();
     	e.init();
+    	l.init();
     	
     	System.out.println("|------------------------------------------------------|");
     	System.out.println("| Team 1699 Robot: awating drive mode           |");
@@ -212,6 +224,7 @@ public class Robot extends IterativeRobot {
     	a.run();
     	c.run();
     	e.run();
+    	l.run();
     	//rd.arcadeDrive(driverController);
     	this.updateDashboard();
     }
