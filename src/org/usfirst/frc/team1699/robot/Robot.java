@@ -126,7 +126,7 @@ public class Robot extends IterativeRobot {
     	e = new Agitator("agitator", 8, appendageController, agitator);
     	s = new Sleep("sleep", 9);
     	
-    	CameraServer.getInstance().startAutomaticCapture();    	
+    	CameraServer.getInstance().startAutomaticCapture();
     	
     	//add commands to map
     	map.addEntry(g.getName(), g);
@@ -161,18 +161,19 @@ public class Robot extends IterativeRobot {
     	autoChooser.addObject("Base Line", baseLine);
     	
     	SmartDashboard.putData("AutoChooser", autoChooser);
+    	this.updateDashboard();
     }
     
     public void robotPeriodic(){
-    	
+    	this.updateDashboard();
     }
 
     public void disabledInit(){
-
+    	this.updateDashboard();
     }
 	
 	public void disabledPeriodic() {
-		
+		this.updateDashboard();
 	}
 
     public void autonomousInit() {
@@ -193,14 +194,15 @@ public class Robot extends IterativeRobot {
         	default: baseLineAuto.runScript();
         		break;
         }
+        this.updateDashboard();
     }
     
     public void autonomousPeriodic() {
-    	
+    	this.updateDashboard();
     }
 
     public void teleopInit() {
-    	
+    	this.updateDashboard();
     }
 
     public void teleopPeriodic() {
@@ -212,10 +214,21 @@ public class Robot extends IterativeRobot {
     	c.run();
     	e.run();
     	//rd.arcadeDrive(driverController);
+    	this.updateDashboard();
     }
     
     public void testPeriodic() {
-        
+    	this.updateDashboard();
+    }
+    
+    private void updateDashboard(){
+    	p.outputToDashboard();
+    	g.outputToDashboard();
+    	b.outputToDashboard();
+    	db.outputToDashboard();
+    	d.outputToDashboard();
+    	t.outputToDashboard();
+    	c.outputToDashboard();
     }
     
 }

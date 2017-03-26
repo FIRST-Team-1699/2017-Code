@@ -6,11 +6,13 @@ import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class GearManipulator extends Command implements AutoCommand{
 		private DoubleSolenoid solenoid;
 		private DoubleSolenoid solenoid2;
 		private boolean controllerToggle;
+		private boolean isOpen = false;
 		private XboxController controller;
 		public static final double SOLENOID_OFF = 0.0;
 		public static final double SOLENOID_ON = 1.0;
@@ -61,12 +63,14 @@ public class GearManipulator extends Command implements AutoCommand{
 		if(controller.getRawButton(3)){
 			solenoid.set(Value.kForward);
 			solenoid2.set(Value.kForward);
+			isOpen = true;
 		}else if(controller.getRawButton(4)){
 			solenoid.set(Value.kReverse);
 			solenoid2.set(Value.kReverse);
 		}else{
 			solenoid.set(Value.kOff);
 			solenoid2.set(Value.kOff);
+			isOpen = false;
 		}
 	}
 
@@ -88,7 +92,7 @@ public class GearManipulator extends Command implements AutoCommand{
 
 	@Override
 	public void outputToDashboard() {
-		
+		SmartDashboard.putBoolean("Gear Open", isOpen);
 	}
 
 	@Override
