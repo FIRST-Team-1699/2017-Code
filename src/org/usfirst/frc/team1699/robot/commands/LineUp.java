@@ -43,8 +43,13 @@ public class LineUp extends Command implements AutoCommand {
 
 	@Override
 	public void runAuto(double distance, double speed, boolean useSensor) {
-		
-			drive.arcadeDrive(0, pid.output());
+		if(xbox.getBack()){
+			if(initX > TARGET_CENTER_X) {
+				drive.arcadeDrive(0, pid.output());
+			}else if(initX < TARGET_CENTER_X){
+				drive.arcadeDrive(pid.output(), 0);
+			}
+		}
 	}
 
 	@Override
