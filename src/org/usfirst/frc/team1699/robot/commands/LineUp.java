@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1699.robot.commands;
 
 import org.usfirst.frc.team1699.robot.pid.PIDLoop;
-import org.usfirst.frc.team1699.robot.pid.sensors.Vision;
+import org.usfirst.frc.team1699.robot.pid.sensors.PIDVision;
 import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
 import org.usfirst.frc.team1699.utils.command.Command;
 import org.usfirst.frc.team1699.utils.drive.XboxController;
@@ -17,7 +17,7 @@ public class LineUp extends Command implements AutoCommand {
 	public static final int TARGET_CENTER_X = 180;
 	private double initX = table.getNumber("centerX", 0.0);
 
-	public LineUp(String name, int id, RobotDrive drive, XboxController xbox, NetworkTable table, Vision vision) {
+	public LineUp(String name, int id, RobotDrive drive, XboxController xbox, NetworkTable table, PIDVision vision) {
 		super(name, id);
 		this.drive = drive;
 		this.pid = new PIDLoop("vision_loop", 34, 1,1,1, vision);
