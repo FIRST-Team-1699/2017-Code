@@ -138,10 +138,10 @@ public class Robot extends IterativeRobot {
     	map.addEntry(c.getName(), e);
     	map.addEntry(s.getName(), s);
     	
-    	baseLineAuto = new AutoScriptReader("/home/lvuser/forward.nav", map);
-    	gearLeftAuto = new AutoScriptReader("/home/lvuser/forwardLeftGear.nav", map);
-        gearRightAuto = new AutoScriptReader("/home/lvuser/forwardRightGear.nav", map);
-        gearStraightAuto = new AutoScriptReader("/home/lvuser/forwardGear.nav", map);
+    	baseLineAuto = new AutoScriptReader(Constants.path + Constants.forward, map);
+    	gearLeftAuto = new AutoScriptReader(Constants.path + Constants.forwardLeftGear, map);
+        gearRightAuto = new AutoScriptReader(Constants.path + Constants.forwardRightGear, map);
+        gearStraightAuto = new AutoScriptReader(Constants.path + Constants.forwardGear, map);
     	
     	p.init();
     	g.init();
@@ -167,7 +167,7 @@ public class Robot extends IterativeRobot {
     public void robotPeriodic(){
     	this.updateDashboard();
     }
-
+    
     public void disabledInit(){
     	this.updateDashboard();
     }
@@ -209,7 +209,7 @@ public class Robot extends IterativeRobot {
     	p.run();
     	g.run();
     	b.run();
-    	db.run(); //Might break
+    	db.run();
     	a.run();
     	c.run();
     	e.run();

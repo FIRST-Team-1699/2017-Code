@@ -25,5 +25,9 @@ public class Constants {
 	public static final int ENCODER2_1 = 2;
 	public static final int ENCODER2_2 = 3;
 	
-	public static final String forwardGearPath = "forwardGear.nav";
+	public static final String path = "/home/lvuser/";
+	public static final String forward = "forward.nav";
+	public static final String forwardLeftGear = "forwardLeftGear.nav";
+	public static final String forwardRightGear = "forwardRightGear.nav";
+	public static final String forwardGear = "forwardGear.nav";
 }
