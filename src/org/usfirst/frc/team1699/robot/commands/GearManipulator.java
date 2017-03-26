@@ -60,11 +60,11 @@ public class GearManipulator extends Command implements AutoCommand{
 
 	@Override
 	public void run() {
-		if(controller.getRawButton(3)){
+		if(controller.getRawButton(3)){ //Press button X
 			solenoid.set(Value.kForward);
 			solenoid2.set(Value.kForward);
 			isOpen = true;
-		}else if(controller.getRawButton(4)){
+		}else if(controller.getRawButton(4)){ //Press button Y
 			solenoid.set(Value.kReverse);
 			solenoid2.set(Value.kReverse);
 		}else{
