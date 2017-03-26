@@ -17,6 +17,7 @@ import org.usfirst.frc.team1699.utils.drive.XboxController;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
@@ -112,17 +113,20 @@ public class Robot extends IterativeRobot {
     	
     	//define and instantiate commands
     	p = new Pickup("pickup", 0, appendageController, pickup);
-    	g = new GearManipulator("gear", 1, appendageController, gearManipulator); //fix
+    	g = new GearManipulator("gear", 1, appendageController, gearManipulator, ballDoor);
     	b = new BallShooter("shooter", 2, appendageController, shooter);
     	db = new DriveBase("driveBase", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2);
     	rd = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
     	d = new Drive("drive", 4, driverController, rd, enc1, enc2);
     	t = new Turn("turn", 5, driverController, rd, enc1, enc2);
-    	a = new BallDoor("ballDoor", 6, appendageController, ballDoor);
+    	//a = new BallDoor("ballDoor", 6, appendageController, ballDoor);
     	c = new Climber("climber", 7, driverController, climber1, climber2); //does not have toggle
+    	//
+    	
     	e = new Agitator("agitator", 8, appendageController, agitator);
     	s = new Sleep("sleep", 9);
     	
+    	CameraServer.getInstance().startAutomaticCapture();    	
     	
     	//add commands to map
     	map.addEntry(g.getName(), g);
@@ -130,7 +134,7 @@ public class Robot extends IterativeRobot {
     	map.addEntry(d.getName(), d);
     	map.addEntry(t.getName(), t);
     	
-    	map.addEntry(a.getName(), a);
+    	//map.addEntry(a.getName(), a);
     	map.addEntry(c.getName(), e);
     	map.addEntry(s.getName(), s);
     	
