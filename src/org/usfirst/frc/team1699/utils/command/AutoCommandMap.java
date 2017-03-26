@@ -7,6 +7,7 @@ package org.usfirst.frc.team1699.utils.command;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiConsumer;
 
 import org.usfirst.frc.team1699.utils.autonomous.AutoCommand;
 
@@ -64,5 +65,9 @@ public class AutoCommandMap {
 		}
 		
 		cmds.put(key, cmd);
+	}
+	
+	public void forEach(BiConsumer<? super String, ? super AutoCommand> action){
+		cmds.forEach(action);
 	}
 }
