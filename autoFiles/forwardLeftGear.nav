@@ -1,4 +1,5 @@
 drive until 20 at 0.6 //drive forward for 20 ticks of the encoders at .6 speed
 turn until 20 //turn right 20 ticks
+lineUp
 drive until 20 at 0.6 //drive forward for 20 ticks of the encoders at .6 speed
 gear at 1.0 //release gear piston
