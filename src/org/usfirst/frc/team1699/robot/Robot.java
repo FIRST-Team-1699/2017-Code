@@ -112,7 +112,7 @@ public class Robot extends IterativeRobot {
     	
     	//define and instantiate commands
     	p = new Pickup("pickup", 0, appendageController, pickup);
-    	g = new GearManipulator("gear", 1, appendageController, gearManipulator); //does not have toggle
+    	g = new GearManipulator("gear", 1, appendageController, gearManipulator); //fix
     	b = new BallShooter("shooter", 2, appendageController, shooter);
     	db = new DriveBase("driveBase", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2);
     	rd = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);

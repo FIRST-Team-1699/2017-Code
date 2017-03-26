@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 public class GearManipulator extends Command implements AutoCommand{
 		private DoubleSolenoid solenoid;
+		private DoubleSolenoid solenoid2;
 		private boolean controllerToggle;
 		private XboxController controller;
 		public static final double SOLENOID_OFF = 0.0;
@@ -23,12 +24,12 @@ public class GearManipulator extends Command implements AutoCommand{
 	 * @param controller
 	 * @param solid_1
 	 */
-	 public GearManipulator(String name, int id, XboxController controller,  DoubleSolenoid solenoid){
+	 public GearManipulator(String name, int id, XboxController controller,  DoubleSolenoid solenoid, DoubleSolenoid solenoid2){
 		super(name, id);
 		controllerToggle = false;
 		this.solenoid = solenoid;
 		this.controller = controller;
-		
+		this.solenoid2 = solenoid2;
 	}
 	 
 	 /**
@@ -59,10 +60,13 @@ public class GearManipulator extends Command implements AutoCommand{
 	public void run() {
 		if(controller.getRawButton(3)){
 			solenoid.set(Value.kForward);
+			solenoid2.set(Value.kForward);
 		}else if(controller.getRawButton(4)){
 			solenoid.set(Value.kReverse);
+			solenoid2.set(Value.kReverse);
 		}else{
 			solenoid.set(Value.kOff);
+			solenoid2.set(Value.kOff);
 		}
 	}
 
