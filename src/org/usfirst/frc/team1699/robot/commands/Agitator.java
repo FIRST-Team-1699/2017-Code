@@ -34,7 +34,7 @@ public class Agitator extends Command implements AutoCommand{
 	
 	@Override
 	public void run() {
-		if(xbox.getBack()){
+		if(xbox.getDPadUp()){
 			cont.set(0.6);
 		}else if(xbox.getDPadDown()){
 			cont.set(-0.6);

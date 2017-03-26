@@ -60,14 +60,14 @@ public class Climber extends Command{
 	 */
 	@Override
 	public void run() {
-		if(xbox.getRawButton(1)){ //Press A to turn motor forward and climb
+		if(xbox.getRightBumper()){ //Press right bumper to turn motor forward and climb
 			sController1.set(speed);
 			sController2.set(speed);
 			if (speed <= 1){
 				speed += 0.01;
 			}
 			isRunning = true;
-		}else if(xbox.getRawButton(2)){ //Press B to stop motor
+		}else if(xbox.getLeftBumper()){ //Press left bumper to stop motor
 			sController1.set(0);
 			sController2.set(0);
 			speed = 0;
