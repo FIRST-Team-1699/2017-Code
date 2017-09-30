@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class GearManipulator extends Command implements AutoCommand{
 		private DoubleSolenoid solenoid;
 		private DoubleSolenoid solenoid2;
-		private boolean controllerToggle;
 		private boolean isOpen = false;
 		private XboxController controller;
 		public static final double SOLENOID_OFF = 0.0;
@@ -28,30 +27,10 @@ public class GearManipulator extends Command implements AutoCommand{
 	 */
 	 public GearManipulator(String name, int id, XboxController controller,  DoubleSolenoid solenoid, DoubleSolenoid solenoid2){
 		super(name, id);
-		controllerToggle = false;
 		this.solenoid = solenoid;
 		this.controller = controller;
 		this.solenoid2 = solenoid2;
 	}
-	 
-	 /**
-	  * Constructor for the GearManipulator class, allows for the controller to be toggled
-	  * 
-	  * @param compressor
-	  * @param controller
-	  * @param solid_1
-	  * @param controllerToggle
-	  * @param name
-	  * @param id
-	  */
-	 public GearManipulator(String name, int id, XboxController controller, DoubleSolenoid solenoid, boolean controllerToggle){
-			super(name, id);
-			
-			this.controllerToggle = controllerToggle;
-			this.solenoid = solenoid;
-			this.controller = controller;
-			
-		}
 
 
 	@Override

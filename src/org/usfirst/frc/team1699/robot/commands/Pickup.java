@@ -27,7 +27,6 @@ public class Pickup extends Command{
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 		
 	}
 	

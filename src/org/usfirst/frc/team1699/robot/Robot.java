@@ -2,13 +2,11 @@
 package org.usfirst.frc.team1699.robot;
 
 import org.usfirst.frc.team1699.robot.commands.Agitator;
-import org.usfirst.frc.team1699.robot.commands.BallDoor;
 import org.usfirst.frc.team1699.robot.commands.BallShooter;
 import org.usfirst.frc.team1699.robot.commands.Climber;
 import org.usfirst.frc.team1699.robot.commands.Drive;
 import org.usfirst.frc.team1699.robot.commands.DriveBase;
 import org.usfirst.frc.team1699.robot.commands.GearManipulator;
-//import org.usfirst.frc.team1699.robot.commands.LineUp;
 import org.usfirst.frc.team1699.robot.commands.Pickup;
 import org.usfirst.frc.team1699.robot.commands.Sleep;
 import org.usfirst.frc.team1699.robot.commands.Turn;
@@ -31,162 +29,154 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot {
 	
-	//define and instantiate commands
+	//Defines commands
 	private Pickup p;
 	private GearManipulator g;
 	private BallShooter b;
 	private DriveBase db;
 	private Drive d;
 	private Turn t;
-	private BallDoor a;
 	private Climber c;
 	private AutoCommandMap map;
 	private Compressor comp;
 	private Agitator e;
 	private Sleep s;
-	//private LineUp l;
 	
+	//Ball manipulator motor controllers
 	private VictorSP pickup;
 	private VictorSP shooter;
+	
+	//Climber motor controllers
 	private VictorSP climber1;
 	private VictorSP climber2;
+	
+	//Agitator motor controller
 	private VictorSP agitator;
 	
+	//Drive motor controllers
 	private CANTalon driveLeft1;
 	private CANTalon driveLeft2;
 	private CANTalon driveRight1;
 	private CANTalon driveRight2;
 	
-	//private NetworkTable table;
-	//private PIDVision pidVision;
+	//Solenoids
+	private DoubleSolenoid gearManipulator1;
+	private DoubleSolenoid gearManipulator2;
 	
-	private DoubleSolenoid gearManipulator;
-	
-	private DoubleSolenoid ballDoor;
-	
+	//Controllers
 	private XboxController driverController;
 	private XboxController appendageController;
 	
+	//Encoders
 	private Encoder enc1;
 	private Encoder enc2;
 	
+	//Robot drive
 	private RobotDrive rd;
 	
+	//Auto scripts
 	private AutoScriptReader baseLineAuto;
 	private AutoScriptReader gearLeftAuto;
 	private AutoScriptReader gearRightAuto;
 	private AutoScriptReader gearStraightAuto;
 	
+	//Auto modes
 	private final String gearStraight = "Gear Straight";
 	private final String gearLeft = "Gear Left";
 	private final String gearRight = "Gear Right";
 	private final String baseLine = "Base Line";
 	private String autoSelected;
-	@SuppressWarnings("rawtypes")
-	private SendableChooser autoChooser;
-	
-	@SuppressWarnings({ "rawtypes", "unchecked"})
+	private SendableChooser<String> autoChooser;
 	
     public void robotInit() {
+    	//Compressor/Solenoid init
     	Solenoid.setDefaultSolenoidModule(25);
     	comp = new Compressor(25);
     	comp.start();
     	
+    	//Controller init
     	driverController = new XboxController(0, 0.1);
     	appendageController = new XboxController(1, 0.1);
     	
+    	//Motor controller init
     	pickup = new VictorSP(Constants.MOTOR_PICKUP_PWM);
     	shooter = new VictorSP(Constants.MOTOR_SHOOTER);
     	climber1 = new VictorSP(Constants.MOTOR_CLIMBER1);
     	climber2 = new VictorSP(Constants.MOTOR_CLIMBER2);
     	agitator = new VictorSP(Constants.MOTOR_AGITATOR);
-    	
     	driveLeft1 = new CANTalon(Constants.MOTOR_DRIVE_LEFT1);
     	driveLeft2 = new CANTalon(Constants.MOTOR_DRIVE_LEFT2);
     	driveRight1 = new CANTalon(Constants.MOTOR_DRIVE_RIGHT1);
     	driveRight2 = new CANTalon(Constants.MOTOR_DRIVE_RIGHT2);
     	
-    	gearManipulator = new DoubleSolenoid(Constants.GEAR_MANIPULATOR_SOLENOID_OPEN, Constants.GEAR_MANIPULATOR_SOLENOID_CLOSE);
-    	ballDoor = new DoubleSolenoid(Constants.BALL_DOOR_SOLENOID_OPEN, Constants.BALL_DOOR_SOLENOID_CLOSE);
-    	
-    	//pidVision = new PIDVision();
-    	
-    	//this might not be right
+    	//Solenoid init
+    	gearManipulator1 = new DoubleSolenoid(Constants.GEAR_MANIPULATOR_SOLENOID_OPEN, Constants.GEAR_MANIPULATOR_SOLENOID_CLOSE);
+    	gearManipulator2 = new DoubleSolenoid(Constants.BALL_DOOR_SOLENOID_OPEN, Constants.BALL_DOOR_SOLENOID_CLOSE);
+
+    	//Encoder init
     	enc1 = new Encoder(Constants.ENCODER1_1, Constants.ENCODER1_2, false, Encoder.EncodingType.k4X);
     	enc2 = new Encoder(Constants.ENCODER2_1, Constants.ENCODER2_2, true, Encoder.EncodingType.k4X);
     	
-    	//instantiate map
+    	//Map init
     	map = new AutoCommandMap();
     	
-    	//define and instantiate commands
+    	//Command init
     	p = new Pickup("pickup", 0, appendageController, pickup);
-    	g = new GearManipulator("gear", 1, appendageController, gearManipulator, ballDoor);
+    	g = new GearManipulator("gear", 1, appendageController, gearManipulator1, gearManipulator2);
     	b = new BallShooter("shooter", 2, appendageController, shooter);
     	db = new DriveBase("driveBase", 3, driverController, driveLeft1, driveLeft2, driveRight1, driveRight2);
     	rd = new RobotDrive(driveLeft1, driveLeft2, driveRight1, driveRight2);
     	d = new Drive("drive", 4, driverController, rd, enc1, enc2);
     	t = new Turn("turn", 5, driverController, rd, enc1, enc2);
-    	//a = new BallDoor("ballDoor", 6, appendageController, ballDoor);
-    	c = new Climber("climber", 7, driverController, climber1, climber2); //does not have toggle
-    	//l = new LineUp("lineUp", 8, rd, appendageController, table, pidVision);
-    	
+    	c = new Climber("climber", 7, driverController, climber1, climber2);
     	e = new Agitator("agitator", 8, appendageController, agitator);
     	s = new Sleep("sleep", 9);
     	
+    	//Camera init
     	CameraServer.getInstance().startAutomaticCapture();
     	
-    	//add commands to map
+    	//Adds commands to map for auto
     	map.addEntry(g.getName(), g);
     	map.addEntry(b.getName(), b);
     	map.addEntry(d.getName(), d);
     	map.addEntry(t.getName(), t);
-    	
-    	//map.addEntry(a.getName(), a);
     	map.addEntry(e.getName(), e);
     	map.addEntry(s.getName(), s);
-    	//map.addEntry(l.getName(), l);
     	
+    	//Auto command init
     	baseLineAuto = new AutoScriptReader(Constants.path + Constants.forward, map);
     	gearLeftAuto = new AutoScriptReader(Constants.path + Constants.forwardLeftGear, map);
         gearRightAuto = new AutoScriptReader(Constants.path + Constants.forwardRightGear, map);
         gearStraightAuto = new AutoScriptReader(Constants.path + Constants.forwardGear, map);
     	
+        //Command init
     	p.init();
     	g.init();
     	b.init();
     	db.init();
-    	//a.init();
     	c.init();
     	e.init();
-    	//l.init();
     	
+    	//Init msg
     	System.out.println("|------------------------------------------------------|");
     	System.out.println("| Team 1699 Robot: awating drive mode           |");
     	System.out.println("|------------------------------------------------------|");
-    	autoChooser = new SendableChooser();
+    	
+    	//Used to set auto mode
+    	autoChooser = new SendableChooser<String>();
     	autoChooser.addObject("Gear Straight",  gearStraight);
     	autoChooser.addObject("Gear Left", gearLeft);
     	autoChooser.addObject("Gear Right", gearRight);
     	autoChooser.addObject("Base Line", baseLine);
     	
+    	//Puts auto mode selector on dashboard
     	SmartDashboard.putData("AutoChooser", autoChooser);
-    	this.updateDashboard();
     }
-    
-    public void robotPeriodic(){
-    	this.updateDashboard();
-    }
-    
-    public void disabledInit(){
-    	this.updateDashboard();
-    }
-	
-	public void disabledPeriodic() {
-		this.updateDashboard();
-	}
 
+    //Called during the start of auto
     public void autonomousInit() {
-          autoSelected = (String) autoChooser.getSelected();
+    	//Runs selected auto mode
+        autoSelected = (String) autoChooser.getSelected();
         
         System.out.println("Auto Mode: " + autoSelected);
         
@@ -203,42 +193,15 @@ public class Robot extends IterativeRobot {
         	default: baseLineAuto.runScript();
         		break;
         }
-        this.updateDashboard();
-    }
-    
-    public void autonomousPeriodic() {
-    	this.updateDashboard();
-    }
-
-    public void teleopInit() {
-    	this.updateDashboard();
     }
 
     public void teleopPeriodic() {
+    	//Runs commands during teleop
     	p.run();
     	g.run();
     	b.run();
     	db.run();
-  //  	a.run();
     	c.run();
     	e.run();
-    	//l.run();
-    	//rd.arcadeDrive(driverController);
-    	//this.updateDashboard();
     }
-    
-    public void testPeriodic() {
-    	this.updateDashboard();
-    }
-    
-    private void updateDashboard(){
-//    	p.outputToDashboard();
-//    	g.outputToDashboard();
-//    	b.outputToDashboard();
-//    	db.outputToDashboard();
-//    	d.outputToDashboard();
-//    	t.outputToDashboard();
-//    	c.outputToDashboard();
-    }
-    
 }

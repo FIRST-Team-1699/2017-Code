@@ -11,7 +11,6 @@ public class Climber extends Command{
 	private SpeedController sController1, sController2;
 	private XboxController xbox;
 	private boolean isRunning = false;
-//	private boolean controllerToggle;
 	private double speed = 0;
 	
 	/**
@@ -25,24 +24,6 @@ public class Climber extends Command{
 	 * @param xbox
 	 */
 	public Climber(String name, int id, XboxController xbox, SpeedController sc1, SpeedController sc2){
-		super(name, id);
-		sController1 = sc1;
-		sController2 = sc2;
-		this.xbox = xbox;
-	}
-	
-	/**
-	 * Constructor for the Climber class (controller toggle included)
-	 * 
-	 * @param name
-	 * @param id
-	 * @param sc1
-	 * @param sc2
-	 * @param compressor
-	 * @param xbox
-	 * @param controllerToggle
-	 */
-	public Climber(String name, int id, XboxController xbox, SpeedController sc1, SpeedController sc2,Compressor compressor, boolean controllerToggle){
 		super(name, id);
 		sController1 = sc1;
 		sController2 = sc2;
